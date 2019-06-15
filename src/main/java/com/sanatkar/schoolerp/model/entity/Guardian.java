@@ -49,4 +49,8 @@ public class Guardian implements Serializable {
 
     @OneToMany(mappedBy = "guardian")
     private Set<StudentsGuardian> studentsGuardians = new HashSet<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_login_id")
+    private User user;
 }

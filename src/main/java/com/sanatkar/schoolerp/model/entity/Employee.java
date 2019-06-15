@@ -68,4 +68,8 @@ public class Employee implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("employees")
     private School school;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_login_id")
+    private User user;
 }

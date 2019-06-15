@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <link rel="icon" th:href="@{images/school.png}">
@@ -9,9 +11,11 @@
 
 </head>
 <body>
-    <h1>Welcome to Home Page</h1>
+<h1>Welcome to Home Page</h1>
 
-    <script th:src="@{webjars/jquery/3.4.1/jquery.min.js}"></script>
-    <script th:src="@{js/bootstrap.min.js}"></script>
+<div sec:authorize="hasRole('ROLE_ADMIN')"></div>
+
+<script th:src="@{webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
 </body>
 </html>
