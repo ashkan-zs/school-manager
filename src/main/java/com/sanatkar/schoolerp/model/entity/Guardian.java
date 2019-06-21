@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Create by ashkan on 2019/06/14
@@ -48,7 +48,7 @@ public class Guardian implements Serializable {
     private String email;
 
     @OneToMany(mappedBy = "guardian")
-    private Set<StudentsGuardian> studentsGuardians = new HashSet<>();
+    private List<StudentsGuardian> studentsGuardians = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_login_id")

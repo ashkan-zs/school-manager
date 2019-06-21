@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Create by ashkan on 2019/06/14
@@ -36,9 +36,9 @@ public class EducationLevel implements Serializable {
     private MarkType markType;
 
     @OneToMany(mappedBy = "level")
-    private Set<Student> students = new HashSet<>();
+    private List<Student> students = new ArrayList<>();
 
     @ManyToMany(mappedBy = "levels")
     @JsonIgnore
-    private Set<Course> courses = new HashSet<>();
+    private List<Course> courses = new ArrayList<>();
 }

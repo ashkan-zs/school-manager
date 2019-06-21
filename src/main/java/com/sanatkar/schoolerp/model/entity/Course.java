@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Create by ashkan on 2019/06/14
@@ -33,5 +33,5 @@ public class Course implements Serializable {
     @JoinTable(name = "course_level",
             joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "level_id", referencedColumnName = "id"))
-    private Set<EducationLevel> levels = new HashSet<>();
+    private List<EducationLevel> levels = new ArrayList<>();
 }

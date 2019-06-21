@@ -8,8 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Create by ashkan on 2019/06/15
@@ -50,6 +50,6 @@ public class User implements Serializable {
     @JoinTable(name = "user_authority",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
-    private Set<Authority> authorities = new HashSet<>();
+    private List<Authority> authorities = new ArrayList<>();
 
 }

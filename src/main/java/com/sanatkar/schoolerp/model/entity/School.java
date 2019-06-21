@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Create by ashkan on 2019/06/14
@@ -45,14 +45,14 @@ public class School implements Serializable {
     private Boolean isGovernmentSchool;
 
     @OneToMany(mappedBy = "school")
-    private Set<Student> students = new HashSet<>();
+    private List<Student> students = new ArrayList<>();
 
     @OneToMany(mappedBy = "school")
-    private Set<Employee> employees = new HashSet<>();
-
-    @OneToMany(mappedBy = "shcool")
-    private Set<ClassRoom> classRooms = new HashSet<>();
+    private List<Employee> employees = new ArrayList<>();
 
     @OneToMany(mappedBy = "school")
-    private Set<AcademicYear> academicYears = new HashSet<>();
+    private List<ClassRoom> classRooms = new ArrayList<>();
+
+    @OneToMany(mappedBy = "school")
+    private List<AcademicYear> academicYears = new ArrayList<>();
 }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>School Detail</title>
+
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{/css/fontawesome.min.css}">
+    <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
+    <link rel="icon" href="../../static/images/school.png" th:href="@{/images/school.png}">
+</head>
+<body>
+
+<div>
+
+    <tabel class="table">
+        <tr>
+            <td th:text="#{school.name}"></td>
+            <td th:text="${school.name}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{school.address}"></td>
+            <td th:text="${school.address}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{school.area}"></td>
+            <td th:text="${school.area}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{school.phone}"></td>
+            <td th:text="${school.phone}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{school.website}"></td>
+            <td th:text="${school.website}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{school.email}"></td>
+            <td th:text="${school.email}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{school.isGovernmentSchool}"></td>
+            <td th:text="${school.isGovernmentSchool}"></td>
+        </tr>
+    </tabel>
+</div>
+
+</body>
+</html>

@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Create by ashkan on 2019/06/14
@@ -32,12 +32,12 @@ public class ClassRoom implements Serializable {
     private Integer capacity;
 
     @OneToMany(mappedBy = "classRoom")
-    private Set<Student> students = new HashSet<>();
+    private List<Student> students = new ArrayList<>();
 
     @OneToMany(mappedBy = "classRoom")
-    private Set<ClassTeacher> teachers = new HashSet<>();
+    private List<ClassTeacher> teachers = new ArrayList<>();
 
     @ManyToOne
     @JsonIgnoreProperties("classRooms")
-    private School shcool;
+    private School school;
 }

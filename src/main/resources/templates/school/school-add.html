@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add School</title>
+
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{/css/fontawesome.min.css}">
+    <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
+    <link rel="icon" href="../../static/images/school.png" th:href="@{/images/school.png}">
+</head>
+<body>
+<div class="col-md-6">
+<form class="needs-validation" novalidate action="#" th:action="@{/schools}" method="post" th:object="${school}">
+
+    <label for="name" th:text="#{school.name}">Name</label>
+    <input class="form-control" type="text" th:field="*{name}" id="name" required>
+
+    <label for="address" th:text="#{school.address}">Address</label>
+    <textarea class="form-control" th:field="*{address}" id="address" required></textarea>
+
+    <label for="area" th:text="#{school.area}">Area</label>
+    <input class="form-control" type="number" th:field="*{area}" id="area" required>
+
+    <label for="phone" th:text="#{school.phone}">Phone</label>
+    <input class="form-control" type="tel" th:field="*{phone}" id="phone" required>
+
+    <label for="website" th:text="#{school.website}">Website</label>
+    <input class="form-control" type="url" th:field="*{website}" id="website">
+
+    <label for="email" th:text="#{school.email}">Email</label>
+    <input class="form-control" type="email" th:field="*{email}" id="email">
+
+    <div class="form-check">
+    <input class="form-check-input" type="checkbox" th:field="*{isGovernmentSchool}" id="isGovernmentSchool">
+    <label class="form-check-label" for="isGovernmentSchool" th:text="#{school.isGovernmentSchool}">Government School</label>
+    </div>
+
+    <input class="btn btn-success" type="Submit" th:value="#{submit}" value="submit">
+    <a class="btn btn-danger" th:href="@{/schools}" th:text="#{cancel}">Cancel</a>
+</form>
+</div>
+
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+</body>
+</html>

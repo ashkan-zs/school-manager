@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Create by ashkan on 2019/06/14
@@ -59,7 +59,7 @@ public class Employee implements Serializable {
     private String email;
 
     @OneToMany(mappedBy = "teacher")
-    private Set<ClassTeacher> classTeachers = new HashSet<>();
+    private List<ClassTeacher> classTeachers = new ArrayList<>();
 
     @ManyToOne
     @JsonIgnoreProperties("employees")

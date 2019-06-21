@@ -23,6 +23,11 @@ public class Authority implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private AuthorityType name;
+
+    public Authority(@NotNull AuthorityType name) {
+        this.name = name;
+    }
 }

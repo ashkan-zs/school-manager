@@ -1,19 +1,21 @@
 package com.sanatkar.schoolerp.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sanatkar.schoolerp.model.entity.enumeration.BloodGroup;
 import com.sanatkar.schoolerp.model.entity.enumeration.Gender;
 import com.sanatkar.schoolerp.model.entity.enumeration.Religion;
 import com.sanatkar.schoolerp.model.entity.enumeration.State;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
-
-import com.sanatkar.schoolerp.model.entity.enumeration.BloodGroup;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Create by ashkan on 2019/06/14
@@ -30,12 +32,15 @@ public class Student implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @Column(name = "first_name")
     private String firstName;
 
+    @NotNull
     @Column(name = "last_name")
     private String lastName;
 
+    @Size(min = 10,max = 10)
     @Column(name = "national_code")
     private String nationalCode;
 
@@ -45,6 +50,7 @@ public class Student implements Serializable {
     @Column(name = "student_no")
     private String studentNo;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
@@ -63,6 +69,7 @@ public class Student implements Serializable {
     @Column(name = "religion")
     private Religion religion;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "register_date")
     private LocalDate registerDate;
 
@@ -86,13 +93,13 @@ public class Student implements Serializable {
     private String phone;
 
     @OneToMany(mappedBy = "student")
-    private Set<StudentAttendance> studentAttendances = new HashSet<>();
+    private List<StudentAttendance> studentAttendances = new ArrayList<>();
 
     @OneToMany(mappedBy = "student")
-    private Set<StudentsGuardian> studentsGuardians = new HashSet<>();
+    private List<StudentsGuardian> studentsGuardians = new ArrayList<>();
 
     @OneToMany(mappedBy = "student")
-    private Set<Transcript> transcripts = new HashSet<>();
+    private List<Transcript> transcripts = new ArrayList<>();
 
     @ManyToOne
     @JsonIgnoreProperties("students")

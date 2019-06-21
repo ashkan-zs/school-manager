@@ -24,6 +24,6 @@ public class JobTitle implements Serializable {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "jhi_role")
+    @Column(name = "role")
     private String role;
 }

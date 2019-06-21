@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Schools</title>
+
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{css/fontawesome.min.css}">
+    <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
+    <link rel="icon" href="../../static/images/school.png" th:src="@{/images/school.png}">
+</head>
+<body>
+<div>
+    <a th:href="@{/schools/add}" th:text="#{school.add}" class="btn btn-primary btn-sm">Add new school</a>
+    <h1 th:if="${schools == null}">There is no school.</h1>
+    <h1 th:unless="${schools == null}">Schools</h1>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <td th:text="#{school.name}">Name</td>
+                <td th:text="#{school.area}">Area</td>
+                <td th:text="#{school.website}">Website</td>
+                <td th:text="#{school.address}">Address</td>
+                <td th:text="#{school.phone}">Phone</td>
+                <td th:text="#{school.email}">Email</td>
+                <td th:text="#{school.isGovernmentSchool}">Government School?</td>
+                <td th:text="#{update}">Update</td>
+                <td th:text="#{delete}">Delete</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="school : ${schools}">
+                <td th:text="${school.name}"></td>
+                <td th:text="${school.area}"></td>
+                <td th:text="${school.website}"></td>
+                <td th:text="${school.address}"></td>
+                <td th:text="${school.phone}"></td>
+                <td th:text="${school.email}"></td>
+                <td th:text="${school.isGovernmentSchool} ? #{yes} : #{no}"></td>
+                <td><a th:href="@{/schools/edit/{id}(id=${school.id})}"><i class="fas fa-edit"></i></a></td>
+                <td><a th:href="@{/schools/delete/{id}(id=${school.id})}"><i class="fas fa-trash-alt"></i></a></td>
+                <td><a th:href="@{/schools/{id}(id=${school.id})}"><i class="fas fa-info-circle"></i></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

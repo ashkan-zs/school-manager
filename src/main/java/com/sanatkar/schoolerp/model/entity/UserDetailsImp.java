@@ -39,7 +39,7 @@ public class UserDetailsImp implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return user.isActivated();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class UserDetailsImp implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return user.isActivated();
     }
 
     @Override
