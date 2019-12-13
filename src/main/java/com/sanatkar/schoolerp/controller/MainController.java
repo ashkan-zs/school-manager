@@ -13,7 +13,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String home() {
-        return "home/home";
+        return "home";
     }
 
     @GetMapping("/login")

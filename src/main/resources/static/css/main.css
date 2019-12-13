@@ -72,8 +72,9 @@ body {
     width: 100%;
 }
 
-#resultFrame {
+#mainContent {
     width: 83vw;
+    padding: 1.2rem;
     margin-right: 210px;
 }
 

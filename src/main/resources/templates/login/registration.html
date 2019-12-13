@@ -1,31 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>ایجاد کاربر</title>
-
-    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
-    <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{/css/fontawesome.min.css}">
-    <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
-    <link rel="icon" href="../../favicon.ico" th:href="@{/images/school.png}">
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
 <body>
 
-
-<div id="register-container" class="d-flex justify-content-center">
+<div id="register-container" class="d-flex justify-content-center" layout:fragment="content">
     <div>
         <div>
-
             <div th:if="${param.success}">
                 <div class="alert alert-info">
                     ثبت نام کاربر با موفقیت انجام شد!
                 </div>
             </div>
-
             <h1>ثبت نام کاربر</h1>
             <form th:action="@{/registration}" th:object="${user}" method="post">
-
                 <p class="error-message"
                    th:if="${#fields.hasGlobalErrors()}"
                    th:each="error : ${#fields.errors('global')}"
@@ -117,10 +105,6 @@
         </div>
     </div>
 </div>
-
-
-<script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
-<script src="webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 
 </body>
 </html>
