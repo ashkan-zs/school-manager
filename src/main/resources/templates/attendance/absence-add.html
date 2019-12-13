@@ -9,9 +9,60 @@
     <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
     <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{css/fontawesome.min.css}">
     <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
-    <link rel="icon" href="../../static/images/school.png" th:src="@{/images/school.png}">
+    <link rel="icon" href="../../favicon.ico" th:src="@{/images/school.png}">
 </head>
 <body>
+
+<div class="col-md-6">
+    <form class="needs-validation" novalidate action="#" th:action="@{/absences}" method="post" th:object="${absence}">
+
+        <label for="student" th:text="#{attendance.student}">Student</label>
+        <select class="form-control" id="student" th:field="*{student}">
+            <option th:each="student : ${students}"
+                    th:value="${student.id}"
+                    th:text="${student.firstName + ' ' + student.lastName}"></option>
+        </select>
+
+        <label for="reason" th:text="#{attendance.reason}">Reason</label>
+        <input class="form-control" type="text" th:field="*{reason}" id="reason" required>
+
+        <div class="form-control">
+            <input class="form-check-input" type="checkbox" th:field="*{isAcceptable}" id="isAcceptable" required>
+            <label class="form-check-label" for="isAcceptable" th:text="#{attendance.isAcceptable}">isAcceptable</label>
+        </div>
+
+        <label for="absenceDate" th:text="#{attendance.date}">Absence Date</label>
+        <input class="form-control" type="date" th:type="date" th:field="*{absenceDate}" id="absenceDate" required>
+
+        <label for="year" th:text="#{attendance.year}">Year</label>
+        <select class="form-control" id="year" th:field="*{year}">
+            <option th:each="year : ${years}"
+            th:value="${year.id}"
+            th:text="${year.name}"></option>
+        </select>
+
+        <input class="btn btn-success" type="Submit" th:value="#{submit}" value="submit">
+        <a class="btn btn-danger" th:href="@{/absences}" th:text="#{cancel}">Cancel</a>
+    </form>
+</div>
+
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 
 <script src="webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>

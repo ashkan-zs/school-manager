@@ -26,11 +26,11 @@ class StudentsGuardian implements Serializable {
     @Column(name = "relation")
     private String relation;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("studentsGuardians")
     private Guardian guardian;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("studentsGuardians")
     private Student student;
 

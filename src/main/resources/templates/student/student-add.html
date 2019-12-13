@@ -6,105 +6,115 @@
     <meta charset="UTF-8">
     <title>Add Student</title>
 
+    <link rel="stylesheet" href="https://unpkg.com/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css">
     <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
     <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{/css/fontawesome.min.css}">
     <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
-    <link rel="icon" href="../../static/images/school.png" th:href="@{/images/school.png}">
+    <link rel="icon" href="../../favicon.ico" th:href="@{/images/school.png}">
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 </head>
 <body>
-<div class="col-md-6">
-    <form class="needs-validation" novalidate action="#" th:action="@{/students}" method="post" th:object="${student}">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <form class="needs-validation" novalidate action="#" th:action="@{/students}" method="post"
+                  th:object="${student}">
+                <label for="firstName" th:text="#{student.firstName}">First Name</label>
+                <input class="form-control" type="text" th:field="*{firstName}" id="firstName" required>
 
-        <label for="firstName" th:text="#{student.firstName}">First Name</label>
-        <input class="form-control" type="text" th:field="*{firstName}" id="firstName" required>
+                <label for="lastName" th:text="#{student.lastName}">Last Name</label>
+                <input class="form-control" type="text" th:field="*{lastName}" id="lastName" required>
 
-        <label for="lastName" th:text="#{student.lastName}">Last Name</label>
-        <input class="form-control" type="text" th:field="*{lastName}" id="lastName" required>
+                <label for="gender" th:text="#{student.gender}">Gender</label>
+                <select class="form-control" id="gender" th:field="*{gender}">
+                    <option th:each="genderType : ${T(com.sanatkar.schoolerp.model.entity.enumeration.Gender).values()}"
+                            th:value="${genderType}"
+                            th:text="#{${'gender.' + genderType}}"></option>
+                </select>
 
-        <label for="gender" th:text="#{student.gender}">Gender</label>
-        <select class="form-control" id="gender" th:field="*{gender}">
-            <option th:each="genderType : ${T(com.sanatkar.schoolerp.model.entity.enumeration.Gender).values()}"
-                    th:value="${genderType}"
-                    th:text="#{${'gender.' + genderType}}"></option>
-        </select>
+                <label for="nationalCode" th:text="#{student.nationalCode}">National Code</label>
+                <input class="form-control" type="text" th:field="*{nationalCode}" id="nationalCode" required>
 
-        <label for="nationalCode" th:text="#{student.nationalCode}">National Code</label>
-        <input class="form-control" type="text" th:field="*{nationalCode}" id="nationalCode" required>
+                <label for="idNumber" th:text="#{student.idNumber}">ID Number</label>
+                <input class="form-control" type="text" th:field="*{idNumber}" id="idNumber" required>
 
-        <label for="idNumber" th:text="#{student.idNumber}">ID Number</label>
-        <input class="form-control" type="text" th:field="*{idNumber}" id="idNumber" required>
+                <label for="studentNo" th:text="#{student.studentNo}">Student No</label>
+                <input class="form-control" type="text" th:field="*{studentNo}" id="studentNo" required>
 
-        <label for="studentNo" th:text="#{student.studentNo}">Student No</label>
-        <input class="form-control" type="text" th:field="*{studentNo}" id="studentNo" required>
+                <label for="birthDate" th:text="#{student.birthDate}">Birth Date</label>
+                <input class="form-control" type="date" th:type="date" th:field="*{birthDate}" id="birthDate" required>
 
-        <label for="birthDate" th:text="#{student.birthDate}">Birth Date</label>
-        <input class="form-control" type="date" th:type="date" th:field="*{birthDate}" id="birthDate" required>
+                <label for="registerDate" th:text="#{student.registerDate}">Register Date</label>
+                <input class="form-control" type="date" th:type="date" th:field="*{registerDate}" id="registerDate"
+                       required>
+                <label for="fathersName" th:text="#{student.fathersName}">Father's Name</label>
+                <input class="form-control" type="text" th:field="*{fathersName}" id="fathersName" required>
 
-        <label for="registerDate" th:text="#{student.registerDate}">Register Date</label>
-        <input class="form-control" type="date" th:type="date" th:field="*{registerDate}" id="registerDate" required>
+                <label for="bloodGroup" th:text="#{student.bloodGroup}">Blood Group</label>
+                <select class="form-control" id="bloodGroup" th:field="*{bloodGroup}">
+                    <option th:each="bloodType : ${T(com.sanatkar.schoolerp.model.entity.enumeration.BloodGroup).values()}"
+                            th:value="${bloodType}"
+                            th:text="#{${'bloodGroup.' + bloodType}}"></option>
+                </select>
 
-        <label for="fathersName" th:text="#{student.fathersName}">Father's Name</label>
-        <input class="form-control" type="text" th:field="*{fathersName}" id="fathersName" required>
+                <label for="nationality" th:text="#{student.nationality}">Nationality</label>
+                <input class="form-control" type="text" th:field="*{nationality}" id="nationality" required>
 
-        <label for="bloodGroup" th:text="#{student.bloodGroup}">Blood Group</label>
-        <select class="form-control" id="bloodGroup" th:field="*{bloodGroup}">
-            <option th:each="bloodType : ${T(com.sanatkar.schoolerp.model.entity.enumeration.BloodGroup).values()}"
-                    th:value="${bloodType}"
-                    th:text="#{${'bloodGroup.' + bloodType}}"></option>
-        </select>
+                <label for="motherTongue" th:text="#{student.motherTongue}">Mother Tongue</label>
+                <input class="form-control" type="text" th:field="*{motherTongue}" id="motherTongue" required>
 
-        <label for="nationality" th:text="#{student.nationality}">Nationality</label>
-        <input class="form-control" type="text" th:field="*{nationality}" id="nationality" required>
+                <label for="religion" th:text="#{student.religion}">Religion</label>
+                <select class="form-control" id="religion" th:field="*{religion}">
+                    <option th:each="religionType : ${T(com.sanatkar.schoolerp.model.entity.enumeration.Religion).values()}"
+                            th:value="${religionType}"
+                            th:text="#{${'religion.' + religionType}}"></option>
+                </select>
 
-        <label for="motherTongue" th:text="#{student.motherTongue}">Mother Tongue</label>
-        <input class="form-control" type="text" th:field="*{motherTongue}" id="motherTongue" required>
+                <label for="address" th:text="#{student.address}">Address</label>
+                <textarea class="form-control" th:field="*{address}" id="address" required/>
 
-        <label for="religion" th:text="#{student.religion}">Religion</label>
-        <select class="form-control" id="religion" th:field="*{religion}">
-            <option th:each="religionType : ${T(com.sanatkar.schoolerp.model.entity.enumeration.Religion).values()}"
-                    th:value="${religionType}"
-                    th:text="#{${'religion.' + religionType}}"></option>
-        </select>
+                <label for="phone" th:text="#{student.phone}">Phone</label>
+                <input class="form-control" type="tel" th:field="*{phone}" id="phone" required>
 
-        <label for="address" th:text="#{student.address}">Address</label>
-        <textarea class="form-control" th:field="*{address}" id="address" required/>
+                <label for="lastState" th:text="#{student.lastState}">Last State</label>
+                <select class="form-control" id="lastState" th:field="*{lastState}">
+                    <option th:each="stateType : ${T(com.sanatkar.schoolerp.model.entity.enumeration.State).values()}"
+                            th:value="${stateType}"
+                            th:text="#{${'lastState.' + stateType}}"></option>
+                </select>
 
-        <label for="phone" th:text="#{student.phone}">Phone</label>
-        <input class="form-control" type="tel" th:field="*{phone}" id="phone" required>
+                <label for="lastGPA" th:text="#{student.lastGPA}">Last GPA</label>
+                <input class="form-control" type="text" th:field="*{lastGPA}" id="lastGPA" required>
 
-        <label for="lastState" th:text="#{student.lastState}">Last State</label>
-        <select class="form-control" id="lastState" th:field="*{lastState}">
-            <option th:each="stateType : ${T(com.sanatkar.schoolerp.model.entity.enumeration.State).values()}"
-                    th:value="${stateType}"
-                    th:text="#{${'lastState.' + stateType}}"></option>
-        </select>
+                <label for="eLevel" th:text="#{student.level}">School</label>
+                <select class="form-control" id="eLevel" th:field="*{level}">
+                    <option th:each="level : ${levels}"
+                            th:value="${level.id}"
+                            th:text="${level.name}"></option>
+                </select>
 
-        <label for="lastGPA" th:text="#{student.lastGPA}">Last GPA</label>
-        <input class="form-control" type="text" th:field="*{lastGPA}" id="lastGPA" required>
+                <label for="classRoom" th:text="#{student.class}">School</label>
+                <select class="form-control" id="classRoom" th:field="*{classRoom}">
+                    <option th:each="class : ${classes}"
+                            th:value="${class.id}"
+                            th:text="${class.name}"></option>
+                </select>
 
-        <label for="eLevel" th:text="#{student.level}">School</label>
-        <select class="form-control" id="eLevel" th:field="*{level}">
-            <option th:each="level : ${levels}"
-                    th:value="${level.id}"
-                    th:text="${level.name}"></option>
-        </select>
-
-        <label for="school" th:text="#{student.school}">School</label>
-        <select class="form-control" id="school" th:field="*{school}">
-            <option th:each="school : ${schools}"
-                    th:value="${school.id}"
-                    th:text="${school.name}"></option>
-        </select>
+                <label for="school" th:text="#{student.school}">School</label>
+                <select class="form-control" id="school" th:field="*{school}">
+                    <option th:each="school : ${schools}"
+                            th:value="${school.id}"
+                            th:text="${school.name}"></option>
+                </select>
 
 
-        <input class="btn btn-success" type="Submit" th:value="#{submit}" value="submit">
-        <a class="btn btn-danger" th:href="@{/students}" th:text="#{cancel}">Cancel</a>
-    </form>
+                <input class="btn btn-success" type="Submit" th:value="#{submit}" value="submit">
+                <a class="btn btn-danger" th:href="@{/students}" th:text="#{cancel}">Cancel</a>
+            </form>
+        </div>
+    </div>
 </div>
-
-<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
 
 <script>
     (function () {
@@ -122,6 +132,102 @@
             });
         }, false);
     })();
+
+    // $(".needs-validation").validate({
+    //     rules: {
+    //         firstName: "required",
+    //         lastName: "required",
+    //         nationalCode: {
+    //             required: true,
+    //             minlength: 10,
+    //             maxlength: 10
+    //         },
+    //         password1: {
+    //             required: true,
+    //             minlength: 5
+    //         },
+    //         confirm_password1: {
+    //             required: true,
+    //             minlength: 5,
+    //             equalTo: "#password1"
+    //         },
+    //         email1: {
+    //             required: true,
+    //             email: true
+    //         },
+    //         agree1: "required"
+    //     },
+    //     messages: {
+    //         firstname1: "Please enter your firstname",
+    //         lastname1: "Please enter your lastname",
+    //         username1: {
+    //             required: "Please enter a username",
+    //             minlength: "Your username must consist of at least 2 characters"
+    //         },
+    //         password1: {
+    //             required: "Please provide a password",
+    //             minlength: "Your password must be at least 5 characters long"
+    //         },
+    //         confirm_password1: {
+    //             required: "Please provide a password",
+    //             minlength: "Your password must be at least 5 characters long",
+    //             equalTo: "Please enter the same password as above"
+    //         },
+    //         email1: "Please enter a valid email address",
+    //         agree1: "Please accept our policy"
+    //     },
+    //     errorElement: "em",
+    //     errorPlacement: function (error, element) {
+    //         // Add the `help-block` class to the error element
+    //         error.addClass("help-block");
+    //
+    //         // Add `has-feedback` class to the parent div.form-group
+    //         // in order to add icons to inputs
+    //         element.parents(".col-sm-5").addClass("has-feedback");
+    //
+    //         if (element.prop("type") === "checkbox") {
+    //             error.insertAfter(element.parent("label"));
+    //         } else {
+    //             error.insertAfter(element);
+    //         }
+    //
+    //         // Add the span element, if doesn't exists, and apply the icon classes to it.
+    //         if (!element.next("span")[0]) {
+    //             $("<span class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(element);
+    //         }
+    //     },
+    //     success: function (label, element) {
+    //         // Add the span element, if doesn't exists, and apply the icon classes to it.
+    //         if (!$(element).next("span")[0]) {
+    //             $("<span class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($(element));
+    //         }
+    //     },
+    //     highlight: function (element, errorClass, validClass) {
+    //         $(element).parents(".col-sm-5").addClass("has-error").removeClass("has-success");
+    //         $(element).next("span").addClass("glyphicon-remove").removeClass("glyphicon-ok");
+    //     },
+    //     unhighlight: function (element, errorClass, validClass) {
+    //         $(element).parents(".col-sm-5").addClass("has-success").removeClass("has-error");
+    //         $(element).next("span").addClass("glyphicon-ok").removeClass("glyphicon-remove");
+    //     }
+    // });
+    // $(document).ready(function () {
+    //     $("#birthDate").pDatepicker(
+    //         {
+    //             altField: '#birthDate',
+    //             altFormat: "YYYY/MM/DD",
+    //             observer: true,
+    //             format: 'YYYY/MM/DD',
+    //             initialValue: false,
+    //             initialValueType: 'persian',
+    //             autoClose: true,
+    //             maxDate: 'today',
+    //         }
+    //     );
+    // });
 </script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script src="https://unpkg.com/persian-date@1.1.0/dist/persian-date.min.js"></script>
+<script src="https://unpkg.com/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
 </body>
 </html>

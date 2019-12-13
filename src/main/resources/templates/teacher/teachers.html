@@ -9,10 +9,47 @@
     <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
     <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{css/fontawesome.min.css}">
     <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
-    <link rel="icon" href="../../static/images/school.png" th:src="@{/images/school.png}">
+    <link rel="icon" href="../../favicon.ico" th:src="@{/images/school.png}">
 </head>
 <body>
-
+<div class="container">
+    <a th:href="@{/teachers/add}" class="btn btn-labeled btn-success">
+        <span class="btn-label">
+            <i class="fas fa-plus fa-align-right"></i>
+        </span>
+        <span th:text="#{classTeachers.add}"></span>
+    </a>
+    <h2 th:if="${classTeachers.isEmpty()}" th:text="#{classTeachers.empty}"></h2>
+    <div th:unless="${classTeachers.isEmpty()}" class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <td th:text="#{classTeacher.courseName}">course name</td>
+                <td th:text="#{classTeacher.teacher}">teacher name</td>
+                <td th:text="#{classTeacher.class}">class name</td>
+                <td th:text="#{classTeacher.isPrimary}">isPrimary</td>
+                <td th:text="#{update}">update</td>
+                <td th:text="#{delete}">delete</td>
+                <td th:text="#{detail}"></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="classteacher : ${classTeachers}">
+                <td th:text="${classteacher.courseName}"></td>
+                <td th:text="${classteacher.teacher.lastName}"></td>
+                <td th:text="${classteacher.classRoom.name}"></td>
+                <td th:text="${classteacher.isPrimaryTeacher}"></td>
+                <td><a href="#" th:href="@{/teachers/edit/{id}(id=classteacher.id)}"><i class="fas fa-edit"></i></a>
+                </td>
+                <td><a href="#" th:href="@{/teachers/delete/{id}(id=classteacher.id)}"><i class="fas fa-trash-alt"></i></a>
+                </td>
+                <td><a href="#" th:href="@{/teachers/{id}(id=classteacher.id)}"><i class="fas fa-info-circle"></i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 <script src="webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
 </body>

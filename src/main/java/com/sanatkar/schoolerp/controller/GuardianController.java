@@ -39,19 +39,22 @@ public class GuardianController {
         model.addAttribute("guardian",
                 guardianDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid guardian id: " + id)));
 
-        return "employee/guardian-detail";
+        return "guardian/guardian-detail";
     }
 
     @GetMapping("/add")
-    public String addGuardian(@ModelAttribute("guardian") Guardian guardian) {
-        return "employee/guardian-add";
+    public String addGuardian(@ModelAttribute("guardian") Guardian guardian, Model model) {
+
+        model.addAttribute("users", userDao.findAll());
+
+        return "guardian/guardian-add";
     }
 
     @PostMapping
     public String createGuardian(@ModelAttribute @Valid Guardian guardian, BindingResult result) {
 
         if (result.hasErrors()) {
-            return "employee/guardian-add";
+            return "guardian/guardian-add";
         }
         guardianDao.save(guardian);
 
@@ -63,8 +66,9 @@ public class GuardianController {
 
         model.addAttribute("guardian",
                 guardianDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid guardian id: " + id)));
+        model.addAttribute("users", userDao.findAll());
 
-        return "employee/guardian-edit";
+        return "guardian/guardian-edit";
     }
 
     @PostMapping("/edit/{id}")
@@ -72,7 +76,7 @@ public class GuardianController {
 
         if (result.hasErrors()) {
             guardian.setId(id);
-            return "employee/guardian-edit";
+            return "guardian/guardian-edit";
         }
         guardianDao.save(guardian);
 

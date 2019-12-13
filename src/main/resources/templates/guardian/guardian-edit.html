@@ -9,9 +9,84 @@
     <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
     <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{css/fontawesome.min.css}">
     <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
-    <link rel="icon" href="../../static/images/school.png" th:src="@{/images/school.png}">
+    <link rel="icon" href="../../favicon.ico" th:src="@{/images/school.png}">
 </head>
 <body>
+
+
+<div class="col-md-6">
+    <form action="#" th:action="@{/guardians/edit/{id}(id=${guardian.id})}" method="post" class="needs-validation" th:object="${guardian}">
+        <div class="form-group">
+            <label for="firstName" th:text="#{guardian.firstName}"></label>
+            <input type="text" th:field="*{firstName}" class="form-control" id="firstName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName" th:text="#{guardian.lastName}"></label>
+            <input type="text" th:field="*{lastName}" class="form-control" id="lastName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nationalCode" th:text="#{guardian.nationalCode}"></label>
+            <input type="text" th:field="*{nationalCode}" class="form-control" id="nationalCode" required>
+        </div>
+
+        <div class="form-group">
+            <label for="idNumber" th:text="#{guardian.idNumber}"></label>
+            <input type="text" th:field="*{idNumber}" class="form-control" id="idNumber" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email" th:text="#{guardian.email}"></label>
+            <input type="email" th:field="*{email}" class="form-control" id="email">
+        </div>
+
+        <div class="form-group">
+            <label for="mobile" th:text="#{guardian.mobile}"></label>
+            <input type="text" th:field="*{mobile}" class="form-control" id="mobile" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone" th:text="#{guardian.phone}"></label>
+            <input type="text" th:field="*{phone}" class="form-control" id="phone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="address" th:text="#{guardian.address}"></label>
+            <textarea th:field="*{address}" class="form-control" id="address" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="user" th:text="#{guardian.user}"></label>
+            <select th:field="*{user}" id="user">
+                <option th:each="user : ${users}"
+                        th:value="${user.id}"
+                        th:text="${user.username}"></option>
+            </select>
+        </div>
+
+        <button type="submit" th:text="#{submit}" class="btn btn-success"></button>
+        <a href="#" th:href="@{/guardians}" th:text="#{cancel}" class="btn btn-danger"></a>
+    </form>
+</div>
+
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 
 <script src="webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>

@@ -70,6 +70,8 @@ public class StudentAttendanceController {
 
         model.addAttribute("studentAttendance",
                 studentAttendanceDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid attendance id: " + id)));
+        model.addAttribute("years", yearDao.findAll());
+        model.addAttribute("students", studentDao.findAll());
 
         return "attendance/absence-edit";
     }

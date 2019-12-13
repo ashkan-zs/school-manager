@@ -24,10 +24,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserServiceImp userDetailsService;
 
-//    @Autowired
-//    public void setUserDetailsService(UserServiceImp userDetailsService) {
-//        this.userDetailsService = userDetailsService;
-//    }
+    @Autowired
+    public void setUserDetailsService(UserServiceImp userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -47,12 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
         auth.authenticationProvider(authenticationProvider());
-        auth.inMemoryAuthentication()
-                .withUser("admin")
-                .password(encoder().encode("admin"))
-                .roles("ADMIN","USER");
     }
 
     @Override
@@ -68,11 +63,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         , "/images/**"
                         , "/js/**"
                         , "/webjars/**").permitAll()
-                .anyRequest().permitAll()
-                //.authenticated()
+                .anyRequest()
+                .authenticated()
             .and()
                 .formLogin()
-                .loginPage("/login").permitAll()
+                    .loginPage("/login").permitAll()
             .and()
                 .logout()
                 .invalidateHttpSession(true)
@@ -81,6 +76,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login?logout");
         // @formatter:on
     }
-
-
 }

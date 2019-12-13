@@ -9,9 +9,64 @@
     <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
     <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{css/fontawesome.min.css}">
     <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
-    <link rel="icon" href="../../static/images/school.png" th:src="@{/images/school.png}">
+    <link rel="icon" href="../../favicon.ico" th:src="@{/images/school.png}">
 </head>
 <body>
+
+
+<div class="col-md-6">
+    <form class="needs-validation" action="#" th:action="@{/teachers/edit/{id}(id=${classTeacher.id})}" method="post" th:object="${classTeacher}">
+        <div class="form-group">
+            <label for="courseName" th:text="#{classTeacher.courseName}"></label>
+            <input type="text" th:field="*{courseName}" id="courseName" required>
+        </div>
+
+        <div>
+            <label for="teacher"></label>
+            <select id="teacher">
+                <option th:each="employee : ${teachers}"
+                        th:value="${employee.id}"
+                        th:text="${employee.firstName + ' ' + employee.lastName}"></option>
+            </select>
+        </div>
+
+        <div>
+            <label for="class"></label>
+            <select id="class">
+                <option th:each="class : ${classes}"
+                        th:value="${class.id}"
+                        th:text="${class.name}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input class="form-check-input" type="checkbox" th:field="*{isPrimaryTeacher}" id="isPrimary" required>
+            <label class="form-check-label" for="isPrimary" th:text="#{classTeacher.isPrimary}"></label>
+        </div>
+
+    </form>
+</div>
+
+
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
+
 
 <script src="webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="fragments/header :: head"></head>
+<body>
+
+<div class="wrapper">
+    <!--Page Content-->
+    <div id="home-content">
+        <nav id="sideMenu" class="">
+            <div>
+                <h3>Entities</h3>
+                <ul class="list-unstyled" id="entities">
+                    <li>
+                        <a href="#" name="schools" th:text="#{schools}">Schools</a>
+                    </li>
+                    <li>
+                        <a href="#" name="students" th:text="#{students}">Students</a>
+                    </li>
+                    <li>
+                        <a href="#" name="employees" th:text="#{employees}">employees</a>
+                    </li>
+                    <li>
+                        <a href="#" name="years" th:text="#{years}">Academic Year</a>
+                    </li>
+                    <li>
+                        <a href="#" name="classes" th:text="#{classes}">Classes</a>
+                    </li>
+                    <li>
+                        <a href="#" name="courses" th:text="#{courses}">Courses</a>
+                    </li>
+                    <li>
+                        <a href="#" name="teachers" th:text="#{classTeachers}">teachers</a>
+                    </li>
+                    <li>
+                        <a href="#" name="levels" th:text="#{levels}">levels</a>
+                    </li>
+                    <li>
+                        <a href="#" name="jobs" th:text="#{jobs}">jobs</a>
+                    </li>
+                    <li>
+                        <a href="#" name="guardians" th:text="#{guardians}">Guardians</a>
+                    </li>
+                    <li>
+                        <a href="#" name="absences" th:text="#{attendance}">Student Attendances</a>
+                    </li>
+                    <li>
+                        <a href="#" name="studentLeaves" th:text="#{studentsLeaves}">leaves</a>
+                    </li>
+                    <li>
+                        <a href="#" name="studentGuardians" th:text="#{studentGuardians}">leaves</a>
+                    </li>
+                    <li>
+                        <a href="#" name="transcripts" th:text="#{transcripts}">transcripts</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--Content of page will replace here-->
+        <div id="resultFrame" layout:fragment="content"></div>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

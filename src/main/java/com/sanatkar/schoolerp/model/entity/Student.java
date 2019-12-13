@@ -7,6 +7,7 @@ import com.sanatkar.schoolerp.model.entity.enumeration.Religion;
 import com.sanatkar.schoolerp.model.entity.enumeration.State;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -101,15 +102,18 @@ public class Student implements Serializable {
     @OneToMany(mappedBy = "student")
     private List<Transcript> transcripts = new ArrayList<>();
 
-    @ManyToOne
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("students")
     private ClassRoom classRoom;
 
-    @ManyToOne
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("students")
     private EducationLevel level;
 
-    @ManyToOne
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("students")
     private School school;
 }

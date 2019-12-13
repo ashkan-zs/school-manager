@@ -66,6 +66,8 @@ public class ClassRoomController {
 
         model.addAttribute("class",
                 classRoomDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid class id: " + id)));
+        model.addAttribute("schools", schoolDao.findAll());
+
 
         return "class/class-edit";
     }

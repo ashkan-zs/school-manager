@@ -37,11 +37,11 @@ public class StudentLeaveRequest implements Serializable {
     @Column(name = "status")
     private LeaveStatus status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("studentLeaveRequests")
     private Student student;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("studentLeaveRequests")
     private Guardian guardian;
 

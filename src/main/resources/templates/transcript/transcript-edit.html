@@ -9,9 +9,78 @@
     <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
     <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{css/fontawesome.min.css}">
     <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
-    <link rel="icon" href="../../static/images/school.png" th:src="@{/images/school.png}">
+    <link rel="icon" href="../../favicon.ico" th:src="@{/images/school.png}">
 </head>
 <body>
+
+
+<div class="col-md-6">
+    <form action="#" th:action="@{/transcripts/edit/{id}(id=${transcript.id})}" method="post" th:object="${transcript}" class="needs-validation">
+        <div class="form-group">
+            <label for="student" th:text="#{transcript.student}"></label>
+            <select th:field="*{student}" id="student" class="form-control">
+                <option th:each="student : ${students}"
+                        th:value="${student.id}"
+                        th:text="${student.firstName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="course" th:text="#{transcript.course}"></label>
+            <select th:field="*{course}" id="course" class="form-control">
+                <option th:each="course : ${courses}"
+                        th:value="${course.id}"
+                        th:text="${course.courseName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="grade" th:text="#{transcript.grade}"></label>
+            <input id="grade" th:field="*{grade}" type="text" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="advise" th:text="#{transcript.advise}"></label>
+            <textarea id="advise" th:field="*{advise}" type="text" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="description" th:text="#{transcript.description}"></label>
+            <textarea th:field="*{description}"  id="description" type="text" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="type" th:text="#{transcript.type}"></label>
+            <input id="type" th:field="*{type}" type="text" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="year" th:text="#{transcript.year}"></label>
+            <select th:field="*{year}" id="year" class="form-control">
+                <option th:each="year : ${years}"
+                        th:value="${year.id}"
+                        th:text="${year.courseName}"></option>
+            </select>
+        </div>
+
+        <button type="submit" th:text="#{submit}" class="btn btn-success"></button>
+        <a href="#" th:href="@{/transcripts}" th:text="#{cancel}" class="btn btn-danger"></a>
+    </form>
+</div>
+
+
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
 
 <script src="webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>

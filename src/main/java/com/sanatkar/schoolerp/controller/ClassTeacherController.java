@@ -70,6 +70,8 @@ public class ClassTeacherController {
 
         model.addAttribute("classTeacher",
                 classTeacherDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid classTeacher id: " + id)));
+        model.addAttribute("classes", classRoomDao.findAll());
+        model.addAttribute("teachers", employeeDao.findAll());
 
         return "teacher/teacher-edit";
     }

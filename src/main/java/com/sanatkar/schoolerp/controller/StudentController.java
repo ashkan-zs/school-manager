@@ -1,15 +1,16 @@
 package com.sanatkar.schoolerp.controller;
 
-import com.sanatkar.schoolerp.model.entity.Student;
-import com.sanatkar.schoolerp.model.repository.EducationalLevelDao;
-import com.sanatkar.schoolerp.model.repository.SchoolDao;
-import com.sanatkar.schoolerp.model.repository.StudentDao;
+import com.sanatkar.schoolerp.model.entity.*;
+import com.sanatkar.schoolerp.model.repository.*;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Optional;
 
 /**
  * Create by ashkan on 2019/06/19
@@ -19,17 +20,24 @@ import javax.validation.Valid;
 public class StudentController {
 
     private StudentDao studentDao;
+    private EmployeeDao employeeDao;
     private SchoolDao schoolDao;
     private EducationalLevelDao levelDao;
+    private ClassRoomDao classRoomDao;
 
-    public StudentController(StudentDao studentDao, SchoolDao schoolDao, EducationalLevelDao levelDao) {
-        this.schoolDao = schoolDao;
+    public StudentController(StudentDao studentDao, EmployeeDao employeeDao, SchoolDao schoolDao, EducationalLevelDao levelDao, ClassRoomDao classRoomDao) {
         this.studentDao = studentDao;
+        this.employeeDao = employeeDao;
+        this.schoolDao = schoolDao;
         this.levelDao = levelDao;
+        this.classRoomDao = classRoomDao;
     }
 
     @GetMapping("/{id}")
-    public String getStudent(@PathVariable Long id, Model model) {
+    public String getStudent(@PathVariable Long id, Model model, Authentication authentication) {
+
+        User user = (User) authentication.getPrincipal();
+        System.out.println(user.getId() + " " + user.getAuthorities());
 
         studentDao.findById(id)
                 .ifPresent(o -> model.addAttribute("student", o));
@@ -38,9 +46,19 @@ public class StudentController {
     }
 
     @GetMapping
-    public String getStudents(Model model) {
+    public String getStudents(Model model, Authentication authentication, HttpServletRequest request) {
 
-        model.addAttribute("students", studentDao.findAll());
+
+        UserDetailsImp user = (UserDetailsImp) authentication.getPrincipal();
+        Employee teacher = employeeDao.findByUser(user.getUser());
+        System.out.println(teacher);
+
+        // TODO: check user role if it's admin show all students
+        if (request.isUserInRole("ADMIN")) {
+            model.addAttribute("students", studentDao.findAll());
+        } else {
+//            model.addAttribute("students", studentDao.findByClassRoom());
+        }
 
         return "student/students";
     }
@@ -50,6 +68,7 @@ public class StudentController {
 
         model.addAttribute("schools", schoolDao.findAll());
         model.addAttribute("levels", levelDao.findAll());
+        model.addAttribute("classes", classRoomDao.findAll());
 
         return "student/student-add";
     }
@@ -72,15 +91,15 @@ public class StudentController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid student id: " + id));
         model.addAttribute("student", student);
 
-        return "student/student-update";
+        return "student/student-edit";
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/edit/{id}")
     public String updateStudent(@PathVariable Long id, @ModelAttribute @Valid Student student, BindingResult result) {
 
         if (result.hasErrors()) {
             student.setId(id);
-            return "student/student-update";
+            return "student/student-edit";
         }
         studentDao.save(student);
 

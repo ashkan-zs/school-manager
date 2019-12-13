@@ -1,6 +1,7 @@
 package com.sanatkar.schoolerp.controller.dto;
 
 import com.sanatkar.schoolerp.constraint.FieldMatch;
+import com.sanatkar.schoolerp.model.entity.Authority;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * Create by ashkan on 2019/06/15
@@ -32,4 +34,6 @@ public class UserRegistrationDto {
 
     @NotNull
     private boolean active;
+
+    private List<Authority> authority;
 }

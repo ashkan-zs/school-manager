@@ -34,15 +34,15 @@ public class Transcript implements Serializable {
     @Column(name = "jhi_type")
     private String type;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("transcripts")
     private Course course;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("transcripts")
     private AcademicYear year;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("transcripts")
     private Student student;
 

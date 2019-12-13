@@ -29,12 +29,12 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userDao.findByUsername(s);
+        User user = userDao.findByUsername(username);
 
         if (user == null) {
-            throw new UsernameNotFoundException(s);
+            throw new UsernameNotFoundException(username);
         }
 
         return new UserDetailsImp(user);
@@ -51,8 +51,9 @@ public class UserServiceImp implements UserService {
         User user = new User();
         user.setUsername(registration.getUsername());
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
-        user.setActivated(registration.isActive());
-        user.setDateCreated(LocalDateTime.now());
+        user.setActive(registration.isActive());
+        user.setCreateDate(LocalDateTime.now());
+        user.setAuthorities(registration.getAuthority());
 
         return userDao.save(user);
     }

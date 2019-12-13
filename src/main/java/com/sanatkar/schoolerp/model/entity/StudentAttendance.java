@@ -32,11 +32,11 @@ public class StudentAttendance implements Serializable {
     @Column(name = "absence_date")
     private LocalDate absenceDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("studentAttendances")
     private AcademicYear year;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("studentAttendances")
     private Student student;
 

@@ -9,66 +9,75 @@
     <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
     <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{css/fontawesome.min.css}">
     <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
-    <link rel="icon" href="../../static/images/school.png" th:src="@{/images/school.png}">
+    <link rel="icon" href="../../favicon.ico" th:src="@{/images/school.png}">
 </head>
 <body>
+<div class="container">
+    <a th:href="@{/students/add}" class="btn btn-labeled btn-success">
+        <span class="btn-label">
+            <i class="fas fa-plus fa-align-right"></i>
+        </span>
+        <span th:text="#{students.add}"></span>
+    </a>
+    <h2 th:if="${students.isEmpty()}" th:text="#{students.empty}"></h2>
+    <div th:unless="${students.isEmpty()}" class="table-responsive">
+        <table th:unless="${students.isEmpty()}" class="table table-striped">
+            <thead class="thead-light">
+            <tr>
+                <td th:text="#{student.firstName}">First Name</td>
+                <td th:text="#{student.lastName}">Last Name</td>
+                <td th:text="#{student.gender}">Gender</td>
+                <td th:text="#{student.nationalCode}">National Code</td>
+                <td th:text="#{student.idNumber}">ID Number</td>
+                <td th:text="#{student.studentNo}">Student No</td>
+                <td th:text="#{student.birthDate}">Birth Date</td>
+                <td th:text="#{student.registerDate}">Register Date</td>
+                <td th:text="#{student.fathersName}">Father's Name</td>
+                <td th:text="#{student.bloodGroup}">Blood Group</td>
+                <td th:text="#{student.level}">level</td>
+                <td th:text="#{student.nationality}">Nationality</td>
+                <td th:text="#{student.motherTongue}">Mother Tongue</td>
+                <td th:text="#{student.religion}">Religion</td>
+                <td th:text="#{student.address}">Address</td>
+                <td th:text="#{student.phone}">Phone</td>
+                <td th:text="#{student.lastState}">Last State</td>
+                <td th:text="#{student.lastGPA}">Last GPA</td>
+                <td th:text="#{student.school}">School</td>
+                <td th:text="#{update}">Update</td>
+                <td th:text="#{delete}">Delete</td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.firstName}">First Name</td>
+                <td th:text="${student.lastName}">Last Name</td>
+                <td th:text="#{${'gender.' + student.gender}}">Gender</td>
+                <td th:text="${student.nationalCode}">National Code</td>
+                <td th:text="${student.idNumber}">ID Number</td>
+                <td th:text="${student.studentNo}">Student No</td>
+                <td th:text="${student.birthDate}">Birth Date</td>
+                <td th:text="${student.registerDate}">Register Date</td>
+                <td th:text="${student.fathersName}">Father's Name</td>
+                <td th:text="#{${'bloodGroup.' + student.bloodGroup}}">Blood Group</td>
+                <td th:text="${student.level.name}">level</td>
+                <td th:text="${student.nationality}">Nationality</td>
+                <td th:text="${student.motherTongue}">Mother Tongue</td>
+                <td th:text="#{${'religion.' + student.religion}}">Religion</td>
+                <td th:text="${student.address}">Address</td>
+                <td th:text="${student.phone}">Phone</td>
+                <td th:text="#{${'lastState.' + student.lastState}}">Last State</td>
+                <td th:text="${student.lastGPA}">Last GPA</td>
+                <td th:text="${student.school.name}">School</td>
+                <td><a th:href="@{/students/edit/{id}(id=${student.id})}"><i class="fas fa-edit"></i></a></td>
+                <td><a th:href="@{/students/delete/{id}(id=${student.id})}"><i class="fas fa-trash-alt"></i></a></td>
+                <td><a th:href="@{/students/{id}(id=${student.id})}"><i class="fas fa-info-circle"></i></a></td>
+            </tr>
+            </tbody>
 
-<div>
-    <table class="table table-hover">
-        <thead class="thead-dark">
-        <tr>
-            <td th:text="#{student.firstName}">First Name</td>
-            <td th:text="#{student.lastName}">Last Name</td>
-            <td th:text="#{student.gender}">Gender</td>
-            <td th:text="#{student.nationalCode}">National Code</td>
-            <td th:text="#{student.idNumber}">ID Number</td>
-            <td th:text="#{student.studentNo}">Student No</td>
-            <td th:text="#{student.birthDate}">Birth Date</td>
-            <td th:text="#{student.registerDate}">Register Date</td>
-            <td th:text="#{student.fathersName}">Father's Name</td>
-            <td th:text="#{student.bloodGroup}">Blood Group</td>
-            <td th:text="#{student.nationality}">Nationality</td>
-            <td th:text="#{student.motherTongue}">Mother Tongue</td>
-            <td th:text="#{student.religion}">Religion</td>
-            <td th:text="#{student.address}">Address</td>
-            <td th:text="#{student.phone}">Phone</td>
-            <td th:text="#{student.lastState}">Last State</td>
-            <td th:text="#{student.lastGPA}">Last GPA</td>
-            <td th:text="#{student.school}">School</td>
-            <td th:text="#{update}">Update</td>
-            <td th:text="#{delete}">Delete</td>
-            <td></td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="student : ${students}">
-            <td th:text="${student.firstName}">First Name</td>
-            <td th:text="${student.lastName}">Last Name</td>
-            <td th:text="#{${'gender.' + student.gender}}">Gender</td>
-            <td th:text="${student.nationalCode}">National Code</td>
-            <td th:text="${student.idNumber}">ID Number</td>
-            <td th:text="${student.studentNo}">Student No</td>
-            <td th:text="${student.birthDate}">Birth Date</td>
-            <td th:text="${student.registerDate}">Register Date</td>
-            <td th:text="${student.fathersName}">Father's Name</td>
-            <td th:text="#{${'bloodGroup.' + student.bloodGroup}}">Blood Group</td>
-            <td th:text="${student.nationality}">Nationality</td>
-            <td th:text="${student.motherTongue}">Mother Tongue</td>
-            <td th:text="#{${'religion.' + student.religion}}">Religion</td>
-            <td th:text="${student.address}">Address</td>
-            <td th:text="${student.phone}">Phone</td>
-            <td th:text="#{${'lastState.' + student.lastState}}">Last State</td>
-            <td th:text="${student.lastGPA}">Last GPA</td>
-            <td th:text="${student.school.name}">School</td>
-            <td><a th:href="@{/students/edit/{id}(id=${student.id})}"><i class="fas fa-edit"></i></a></td>
-            <td><a th:href="@{/students/delete/{id}(id=${student.id})}"><i class="fas fa-trash-alt"></i></a></td>
-            <td><a th:href="@{/students/{id}(id=${student.id})}"><i class="fas fa-info-circle"></i></a></td>
-        </tr>
-        </tbody>
-
-    </table>
+        </table>
+    </div>
 </div>
-
 <script src="webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
 </body>

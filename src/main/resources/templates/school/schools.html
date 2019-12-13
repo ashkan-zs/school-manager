@@ -7,17 +7,21 @@
 
     <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
-    <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{css/fontawesome.min.css}">
+    <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{/css/fontawesome.min.css}">
     <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
-    <link rel="icon" href="../../static/images/school.png" th:src="@{/images/school.png}">
 </head>
 <body>
-<div>
-    <a th:href="@{/schools/add}" th:text="#{school.add}" class="btn btn-primary btn-sm">Add new school</a>
-    <h1 th:if="${schools == null}">There is no school.</h1>
-    <h1 th:unless="${schools == null}">Schools</h1>
-    <div class="table-responsive">
-        <table class="table table-hover">
+<div class="container">
+    <a th:href="@{/schools/add}" class="btn btn-labeled btn-success">
+        <span class="btn-label">
+            <i class="fas fa-plus fa-align-right"></i>
+        </span>
+        <span th:text="#{schools.add}"></span>
+    </a>
+    <h2 th:if="${schools.isEmpty()}" th:text="#{schools.empty}">There is no school.</h2>
+    <div th:unless="${schools.isEmpty()}" class="table-responsive">
+        <table class="table table-striped">
+            <caption th:text="#{schools}"></caption>
             <thead>
             <tr>
                 <td th:text="#{school.name}">Name</td>
@@ -29,6 +33,7 @@
                 <td th:text="#{school.isGovernmentSchool}">Government School?</td>
                 <td th:text="#{update}">Update</td>
                 <td th:text="#{delete}">Delete</td>
+                <td th:text="#{detail}"></td>
             </tr>
             </thead>
             <tbody>

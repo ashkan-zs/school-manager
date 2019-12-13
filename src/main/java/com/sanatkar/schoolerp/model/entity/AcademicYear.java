@@ -3,6 +3,7 @@ package com.sanatkar.schoolerp.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -28,13 +29,15 @@ public class AcademicYear implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "from_year")
     private LocalDate fromYear;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "to_year")
     private LocalDate toYear;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("academicYears")
     private School school;
 }

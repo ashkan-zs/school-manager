@@ -70,6 +70,8 @@ public class StudentGuardianController {
 
         model.addAttribute("studentGuardian",
                 studentsGuardianDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid studentGuardian id: " + id)));
+        model.addAttribute("students", studentDao.findAll());
+        model.addAttribute("guardians", guardianDao.findAll());
 
         return "student-guardian/student-guardian-edit";
     }

@@ -7,12 +7,46 @@
 
     <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
-    <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{css/fontawesome.min.css}">
+    <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{/css/fontawesome.min.css}">
     <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
-    <link rel="icon" href="../../static/images/school.png" th:src="@{/images/school.png}">
+    <link rel="icon" href="../../favicon.ico" th:src="@{/images/school.png}">
 </head>
 <body>
-
+<div class="container">
+    <a th:href="@{/years/add}" class="btn btn-labeled btn-success">
+        <span class="btn-label">
+            <i class="fas fa-plus fa-align-right"></i>
+        </span>
+        <span th:text="#{years.add}"></span>
+    </a>
+    <h2 th:if="${years.isEmpty()}" th:text="#{years.empty}"></h2>
+    <div th:unless="${years.isEmpty()}" class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <td th:text="#{year.name}">name</td>
+                <td th:text="#{year.fromYear}">from year</td>
+                <td th:text="#{year.toYear}">to year</td>
+                <td th:text="#{year.school}">school</td>
+                <td th:text="#{update}">update</td>
+                <td th:text="#{delete}">delete</td>
+                <td th:text="#{detail}">detail</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="year : ${years}">
+                <td th:text="${year.name}">name</td>
+                <td th:text="${year.fromYear}">from year</td>
+                <td th:text="${year.toYear}">to year</td>
+                <td th:text="${year.school}">school</td>
+                <td><a th:href="@{/years/edit/{id}(id=${year.id})}"><i class="fas fa-edit"></i></a></td>
+                <td><a th:href="@{/years/delete/{id}(id=${year.id})}"><i class="fas fa-trash-alt"></i></a></td>
+                <td><a th:href="@{/years/{id}(id=${year.id})}"><i class="fas fa-info-circle"></i></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 <script src="webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
 </body>

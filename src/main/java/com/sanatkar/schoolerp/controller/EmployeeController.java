@@ -73,6 +73,9 @@ public class EmployeeController {
 
         model.addAttribute("employee",
                 employeeDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid employee id: " + id)));
+        model.addAttribute("titles", jobTitleDao.findAll());
+        model.addAttribute("schools", schoolDao.findAll());
+        model.addAttribute("users", userDao.findAll());
 
         return "employee/employee-edit";
     }

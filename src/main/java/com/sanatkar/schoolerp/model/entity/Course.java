@@ -29,7 +29,7 @@ public class Course implements Serializable {
     @Column(name = "course_type")
     private String courseType;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "course_level",
             joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "level_id", referencedColumnName = "id"))

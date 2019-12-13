@@ -9,9 +9,58 @@
     <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
     <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{css/fontawesome.min.css}">
     <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
-    <link rel="icon" href="../../static/images/school.png" th:src="@{/images/school.png}">
+    <link rel="icon" href="../../favicon.ico" th:src="@{/images/school.png}">
 </head>
 <body>
+
+<div class="col-md-6">
+    <form class="needs-validation" action="#" th:action="@{/studetnGuardians}" method="post"
+          th:object="${studentGuardian}">
+        <div class="form-group">
+            <label th:text="#{studentGuardian.student}" for="student"></label>
+            <select class="form-control" th:field="*{student}" id="student">
+                <option th:each="student : ${students}"
+                        th:value="${student.id}"
+                        th:text="${student.firstName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label th:text="#{studentGuardian.guardian}" for="guardian"></label>
+            <select class="form-control" th:field="*{guardian}" id="guardian">
+                <option th:each="guardian : ${guardians}"
+                        th:value="${guardian.id}"
+                        th:text="${guardian.firstName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="relation" th:text="#{studentGuardian.relation}"></label>
+            <input type="text" th:field="*{relation}" id="relation" class="form-control" required>
+        </div>
+    </form>
+
+    <button type="submit" class="btn btn-success" th:text="#{submit}"></button>
+    <a href="#" th:href="@{/studentGuardians}" class="btn btn-danger" th:text="#{cancel}"></a>
+</div>
+
+
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
 
 <script src="webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>

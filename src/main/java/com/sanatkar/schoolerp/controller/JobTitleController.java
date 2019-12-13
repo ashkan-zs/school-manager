@@ -1,6 +1,7 @@
 package com.sanatkar.schoolerp.controller;
 
 import com.sanatkar.schoolerp.model.entity.JobTitle;
+import com.sanatkar.schoolerp.model.repository.AuthorityDao;
 import com.sanatkar.schoolerp.model.repository.JobTitleDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +18,11 @@ import javax.validation.Valid;
 public class JobTitleController {
 
     private JobTitleDao jobTitleDao;
+    private AuthorityDao authorityDao;
 
-    public JobTitleController(JobTitleDao jobTitleDao) {
+    public JobTitleController(JobTitleDao jobTitleDao, AuthorityDao authorityDao) {
         this.jobTitleDao = jobTitleDao;
+        this.authorityDao = authorityDao;
     }
 
     @GetMapping
@@ -40,7 +43,9 @@ public class JobTitleController {
     }
 
     @GetMapping("/add")
-    public String addJob(@ModelAttribute("job") JobTitle job) {
+    public String addJob(@ModelAttribute("job") JobTitle job, Model model) {
+        model.addAttribute("auths", authorityDao.findAll());
+
         return "job/job-add";
     }
 

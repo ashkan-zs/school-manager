@@ -70,6 +70,8 @@ public class StudentLeaveRequestController {
 
         model.addAttribute("leave",
                 leaveRequestDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid leave request id: " + id)));
+        model.addAttribute("students", studentDao.findAll());
+        model.addAttribute("guardians", guardianDao.findAll());
 
         return "leave/student-leave-edit";
     }

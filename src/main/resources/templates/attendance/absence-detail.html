@@ -9,9 +9,35 @@
     <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
     <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{css/fontawesome.min.css}">
     <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
-    <link rel="icon" href="../../static/images/school.png" th:src="@{/images/school.png}">
+    <link rel="icon" href="../../favicon.ico" th:src="@{/images/school.png}">
 </head>
 <body>
+
+<div>
+
+    <tabel class="table">
+        <tr>
+            <td th:text="#{attendance.student}">Student</td>
+            <td th:text="${studentAttendance.student.firstName + ' ' + studentAttendance.student.lastName}">Student</td>
+        </tr>
+        <tr>
+            <td th:text="#{attendance.date}">Absence Date</td>
+            <td th:text="${studentAttendance.absenceDate}">Absence Date</td>
+        </tr>
+        <tr>
+            <td th:text="#{attendance.reason}">Reason</td>
+            <td th:text="${studentAttendance.reason}">Reason</td>
+        </tr>
+        <tr>
+            <td th:text="#{attendance.isAcceptable}">isAcceptable</td>
+            <td th:text="${studentAttendance.isAcceptable}">isAcceptable</td>
+        </tr>
+        <tr>
+            <td th:text="#{attendance.year}">Year</td>
+            <td th:text="${studentAttendance.year}">Year</td>
+        </tr>
+    </tabel>
+</div>
 
 <script src="webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>

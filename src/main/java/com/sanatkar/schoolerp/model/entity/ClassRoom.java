@@ -3,6 +3,7 @@ package com.sanatkar.schoolerp.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -37,7 +38,8 @@ public class ClassRoom implements Serializable {
     @OneToMany(mappedBy = "classRoom")
     private List<ClassTeacher> teachers = new ArrayList<>();
 
-    @ManyToOne
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("classRooms")
     private School school;
 }

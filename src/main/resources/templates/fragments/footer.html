@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="footer">
+    <script type="text/javascript" src="../../static/js/core/jquery.min.js" th:src="@{/js/core/jquery.min.js}"></script>
+    <script type="text/javascript" src="../../static/js/main.js" th:src="@{/js/main.js}"></script>
+    <script type="text/javascript" src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="../../static/js/core/popper.min.js" th:src="@{/js/core/popper.min.js}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#entities a').on('click', function () {
+
+                var url = '/' + $(this).attr('name');
+                $('#resultFrame').load(url);
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

@@ -35,18 +35,18 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    private LocalDateTime dateCreated;
+    private LocalDateTime createDate;
 
     @NotNull
     @Column(nullable = false)
-    private boolean activated = false;
+    private boolean active = false;
 
     @NotNull
     @Column(nullable = false)
     private boolean locked = false;
 
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})

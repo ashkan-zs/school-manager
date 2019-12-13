@@ -4,6 +4,8 @@ import com.sanatkar.schoolerp.model.entity.ClassRoom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Create by ashkan on 2019/06/15
  */

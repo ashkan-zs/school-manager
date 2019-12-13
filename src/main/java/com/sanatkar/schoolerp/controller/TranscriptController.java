@@ -74,6 +74,9 @@ public class TranscriptController {
 
         model.addAttribute("transcript",
                 transcriptDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid transcript id: " + id)));
+        model.addAttribute("courses", courseDao.findAll());
+        model.addAttribute("students", studentDao.findAll());
+        model.addAttribute("years", yearDao.findAll());
 
         return "transcript/transcript-edit";
     }

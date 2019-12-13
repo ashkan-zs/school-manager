@@ -28,11 +28,15 @@ public class ClassTeacher implements Serializable {
     @Column(name = "is_primary_teacher")
     private Boolean isPrimaryTeacher;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("teachers")
     private ClassRoom classRoom;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("classTeachers")
     private Employee teacher;
+
+//    @ManyToOne
+//    @JsonIgnoreProperties("courses")
+//    private Course course;
 }

@@ -24,10 +24,10 @@ public class Authority implements Serializable {
     private Long id;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
-    private AuthorityType name;
+//    @Enumerated(EnumType.STRING)
+    private String name;
 
-    public Authority(@NotNull AuthorityType name) {
+    public Authority(@NotNull String name) {
         this.name = name;
     }
 }

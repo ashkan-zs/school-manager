@@ -9,9 +9,70 @@
     <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
     <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{css/fontawesome.min.css}">
     <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
-    <link rel="icon" href="../../static/images/school.png" th:src="@{/images/school.png}">
+    <link rel="icon" href="../../favicon.ico" th:src="@{/images/school.png}">
 </head>
 <body>
+
+<div>
+    <table>
+        <tr>
+            <td th:text="#{employee.firstName}"></td>
+            <td th:text="${employee.firstName}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{employee.lastName}"></td>
+            <td th:text="${employee.lastName}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{employee.nationalCode}"></td>
+            <td th:text="#{employee.nationalCode}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{employee.idNumber}"></td>
+            <td th:text="${employee.idNumber}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{employee.personalId}"></td>
+            <td th:text="${employee.personalId}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{employee.birthDate}"></td>
+            <td th:text="${employee.birthDate}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{employee.hiedDate}"></td>
+            <td th:text="${employee.hiredDate}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{employee.phone}"></td>
+            <td th:text="${employee.phone}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{employee.mobile}"></td>
+            <td th:text="${employee.mobile}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{employee.email}"></td>
+            <td th:text="${employee.email}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{employee.address}"></td>
+            <td th:text="${employee.address}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{employee.title}"></td>
+            <td th:text="${employee.title.title}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{employee.school}"></td>
+            <td th:text="${employee.school.name}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{employee.user}"></td>
+            <td th:text="${employee.user.username}"></td>
+        </tr>
+    </table>
+</div>
 
 <script src="webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>

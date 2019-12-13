@@ -9,10 +9,43 @@
     <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
     <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{css/fontawesome.min.css}">
     <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
-    <link rel="icon" href="../../static/images/school.png" th:src="@{/images/school.png}">
+    <link rel="icon" href="../../favicon.ico" th:src="@{/images/school.png}">
 </head>
 <body>
-
+<div class="container">
+    <a th:href="@{/levels/add}" class="btn btn-labeled btn-success">
+        <span class="btn-label">
+            <i class="fas fa-plus fa-align-right"></i>
+        </span>
+        <span th:text="#{levels.add}"></span>
+    </a>
+    <h2 th:if="${levels.isEmpty()}" th:text="#{levels.empty}"></h2>
+    <div th:unless="${levels.isEmpty()}" class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td th:text="#{level.name}"></td>
+                <td th:text="#{level.base}"></td>
+                <td th:text="#{level.markType}"></td>
+                <td th:text="#{update}"></td>
+                <td th:text="#{delete}"></td>
+                <td th:text="#{detail}"></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="level : ${levels}">
+                <td th:text="${level.name}"></td>
+                <td th:text="${level.base}"></td>
+                <td th:text="#{${'markType.' + level.markType}}"></td>
+                <td><a href="#" th:href="@{/levels/edit/{id}(id=${level.id})}"><i class="fas fa-edit"></i></a></td>
+                <td><a href="#" th:href="@{/levels/delete/{id}(id=${level.id})}"><i class="fas fa-trash-alt"></i></a>
+                </td>
+                <td><a href="#" th:href="@{/levels/{id}(id=${level.id})}"><i class="fas fa-info-circle"></i></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 <script src="webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
 </body>

@@ -15,13 +15,12 @@ import java.util.Locale;
  * Create by ashkan on 2019/06/16
  */
 @Configuration
-public class InternationalizationConfig implements WebMvcConfigurer {
+public class MvcWebConfig implements WebMvcConfigurer {
 
-    @Bean
-    public LocaleResolver localResolver() {
-        SessionLocaleResolver resolver = new SessionLocaleResolver();
-        Locale locale_fa = new Locale("fa","IR");
-        resolver.setDefaultLocale(locale_fa);
+    @Bean(name = "localeResolver")
+    public LocaleResolver localeResolver() {
+        final SessionLocaleResolver resolver = new SessionLocaleResolver();
+        resolver.setDefaultLocale(new Locale("fa", "IR"));
         return resolver;
     }
 

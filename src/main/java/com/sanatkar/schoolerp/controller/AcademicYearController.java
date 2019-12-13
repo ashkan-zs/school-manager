@@ -66,6 +66,7 @@ public class AcademicYearController {
 
         model.addAttribute("year",
                 yearDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid year id: " + id)));
+        model.addAttribute("schools", schoolDao.findAll());
 
         return "year/year-edit";
     }

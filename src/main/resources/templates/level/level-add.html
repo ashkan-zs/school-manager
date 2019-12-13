@@ -9,9 +9,54 @@
     <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
     <link rel="stylesheet" href="../../static/css/fontawesome.min.css" th:href="@{css/fontawesome.min.css}">
     <link rel="stylesheet" href="../../static/css/solid.min.css" th:href="@{/css/solid.min.css}">
-    <link rel="icon" href="../../static/images/school.png" th:src="@{/images/school.png}">
+    <link rel="icon" href="../../favicon.ico" th:src="@{/images/school.png}">
 </head>
 <body>
+
+<div class="col-md-6">
+    <form th:object="${level}" action="#" th:action="@{/levels}" method="post" class="needs-validation">
+
+        <div class="form-group">
+            <label for="name">name</label>
+            <input type="text" th:field="*{name}" id="name" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="base">base</label>
+            <input type="text" th:field="*{base}" id="base" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="markType">mark type</label>
+            <select class="form-control" id="markType" th:field="*{markType}">
+                <option th:each="markType : ${T(com.sanatkar.schoolerp.model.entity.enumeration.MarkType).values()}"
+                        th:value="${markType}"
+                        th:text="#{${'markType.' + markType}}"></option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success" th:text="#{submit}">submit</button>
+        <a class="btn btn-danger" href="#" th:href="@{/levels}" th:text="#{cancel}">cancel</a>
+    </form>
+</div>
+
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 
 <script src="webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
