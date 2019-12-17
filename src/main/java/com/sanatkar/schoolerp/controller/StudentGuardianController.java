@@ -62,7 +62,7 @@ public class StudentGuardianController {
         }
         studentsGuardianDao.save(studentsGuardian);
 
-        return "redirect:/student-guardians";
+        return "redirect:/studentGuardians";
     }
 
     @GetMapping("/edit/{id}")
@@ -77,7 +77,7 @@ public class StudentGuardianController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateStudentGuardian(@PathVariable Long id, BindingResult result, @ModelAttribute @Valid StudentsGuardian studentsGuardian) {
+    public String updateStudentGuardian(@PathVariable Long id, @ModelAttribute @Valid StudentsGuardian studentsGuardian, BindingResult result) {
 
         if (result.hasErrors()) {
             studentsGuardian.setId(id);
@@ -85,7 +85,7 @@ public class StudentGuardianController {
         }
         studentsGuardianDao.save(studentsGuardian);
 
-        return "redirect:/student-guardians";
+        return "redirect:/studentGuardians";
     }
 
     @GetMapping("/delete/{id}")
@@ -94,6 +94,6 @@ public class StudentGuardianController {
         StudentsGuardian studentsGuardian = studentsGuardianDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid studentGuardian id: " + id));
         studentsGuardianDao.delete(studentsGuardian);
 
-        return "redirect:/student-guardians";
+        return "redirect:/studentGuardians";
     }
 }

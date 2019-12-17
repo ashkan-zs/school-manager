@@ -2,46 +2,48 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/default">
+      layout:decorate="~{layouts/default}">
 <body>
 
 <div layout:fragment="content">
     <form action="#" th:action="@{/studentLevels}" method="post" th:object="${studentLeave}" class="needs-validation">
-        <div class="form-group">
-            <label for="student" th:text="#{studentLeave.student}"></label>
-            <select th:field="*{student}" id="student" class="form-control">
-                <option th:each="student : ${students}"
-                        th:value="${student.id}"
-                        th:text="${student.firstName + ' ' + student.lastName}"></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="guardian" th:text="#{studentLeave.student}"></label>
-            <select th:field="*{guardian}" id="guardian" class="form-control">
-                <option th:each="guardian : ${guardians}"
-                        th:value="${guardian.id}"
-                        th:text="${guardian.firstName + ' ' + guardian.lastName}"></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="reason" th:text="#{studentLeave.reason}"></label>
-            <textarea th:field="*{reason}" id="reason" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="lDate" th:text="#{studentLeave.leaveDate}"></label>
-            <input type="date" th:field="*{leaveDate}" id="lDate" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="rDate" th:text="#{studentLeave.requestDate}"></label>
-            <input type="date" th:field="*{requestDate}" id="rDate" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="status" th:text="#{studentLeave.status}"></label>
-            <select th:field="*{status}" id="status" class="form-control">
-                <option th:each="status : ${T(com.sanatkar.schoolerp.model.entity.enumeration.LeaveStatus).values()}"
-                        th:value="${status}"
-                        th:text="#{${'leavelStatus.' + status}}"></option>
-            </select>
+        <div th:fragment="form">
+            <div class="form-group">
+                <label for="student" th:text="#{studentLeave.student}"></label>
+                <select th:field="*{student}" id="student" class="form-control">
+                    <option th:each="student : ${students}"
+                            th:value="${student.id}"
+                            th:text="${student.firstName + ' ' + student.lastName}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="guardian" th:text="#{studentLeave.student}"></label>
+                <select th:field="*{guardian}" id="guardian" class="form-control">
+                    <option th:each="guardian : ${guardians}"
+                            th:value="${guardian.id}"
+                            th:text="${guardian.firstName + ' ' + guardian.lastName}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="reason" th:text="#{studentLeave.reason}"></label>
+                <textarea th:field="*{reason}" id="reason" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="lDate" th:text="#{studentLeave.leaveDate}"></label>
+                <input type="date" th:field="*{leaveDate}" id="lDate" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="rDate" th:text="#{studentLeave.requestDate}"></label>
+                <input type="date" th:field="*{requestDate}" id="rDate" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="status" th:text="#{studentLeave.status}"></label>
+                <select th:field="*{status}" id="status" class="form-control">
+                    <option th:each="status : ${T(com.sanatkar.schoolerp.model.entity.enumeration.LeaveStatus).values()}"
+                            th:value="${status}"
+                            th:text="#{${'leavelStatus.' + status}}"></option>
+                </select>
+            </div>
         </div>
     </form>
 </div>

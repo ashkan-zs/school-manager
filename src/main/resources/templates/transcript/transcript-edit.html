@@ -2,54 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/default">
+      layout:decorate="~{layouts/default}">
 <body>
 
 <div class="col-md-6" layout:fragment="content">
-    <form action="#" th:action="@{/transcripts/edit/{id}(id=${transcript.id})}" method="post" th:object="${transcript}" class="needs-validation">
-        <div class="form-group">
-            <label for="student" th:text="#{transcript.student}"></label>
-            <select th:field="*{student}" id="student" class="form-control">
-                <option th:each="student : ${students}"
-                        th:value="${student.id}"
-                        th:text="${student.firstName}"></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="course" th:text="#{transcript.course}"></label>
-            <select th:field="*{course}" id="course" class="form-control">
-                <option th:each="course : ${courses}"
-                        th:value="${course.id}"
-                        th:text="${course.courseName}"></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="grade" th:text="#{transcript.grade}"></label>
-            <input id="grade" th:field="*{grade}" type="text" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="advise" th:text="#{transcript.advise}"></label>
-            <textarea id="advise" th:field="*{advise}" type="text" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="description" th:text="#{transcript.description}"></label>
-            <textarea th:field="*{description}"  id="description" type="text" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="type" th:text="#{transcript.type}"></label>
-            <input id="type" th:field="*{type}" type="text" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="year" th:text="#{transcript.year}"></label>
-            <select th:field="*{year}" id="year" class="form-control">
-                <option th:each="year : ${years}"
-                        th:value="${year.id}"
-                        th:text="${year.courseName}"></option>
-            </select>
-        </div>
-
-        <button type="submit" th:text="#{submit}" class="btn btn-success"></button>
-        <a href="#" th:href="@{/transcripts}" th:text="#{cancel}" class="btn btn-danger"></a>
+    <form action="#" th:action="@{/transcripts/edit/{id}(id=${transcript.id})}" method="post"
+          th:object="${transcript}"
+          class="needs-validation">
+        <div th:replace="~{transcript/transcript-add :: form}"></div>
     </form>
 </div>
 

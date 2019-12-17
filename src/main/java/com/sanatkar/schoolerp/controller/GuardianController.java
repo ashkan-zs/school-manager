@@ -72,7 +72,7 @@ public class GuardianController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateGuardian(@PathVariable Long id, BindingResult result, @ModelAttribute @Valid Guardian guardian) {
+    public String updateGuardian(@PathVariable Long id, @ModelAttribute @Valid Guardian guardian, BindingResult result) {
 
         if (result.hasErrors()) {
             guardian.setId(id);

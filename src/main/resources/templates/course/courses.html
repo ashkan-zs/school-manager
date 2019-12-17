@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/default">
+      layout:decorate="~{layouts/default}">
 <body>
 
 <div class="container" layout:fragment="content">
@@ -21,16 +21,16 @@
                 <td th:text="#{course.type}">type</td>
                 <td th:text="#{update}">update</td>
                 <td th:text="#{delete}">delete</td>
-                <td th:text="#{detail}"></td>
+                <td th:text="#{detail}">detail</td>
             </tr>
             </thead>
             <tbody>
             <tr th:each="course : ${courses}">
                 <td th:text="${course.courseName}"></td>
                 <td th:text="${course.courseType}"></td>
-                <a href="#" th:href="@{/courses/edit/{id}(id=${course.id})}"><i class="fas fa-edit"></i></a>
-                <a href="#" th:href="@{/courses/delete/{id}(id=${course.id})}"><i class="fas fa-trash-alt"></i></a>
-                <a href="#" th:href="@{/courses/{id}(id=${course.id})}"><i class="fas fa-info-circle"></i></a>
+                <td><a href="#" th:href="@{/courses/edit/{id}(id=${course.id})}"><i class="fas fa-edit"></i></a></td>
+                <td><a href="#" th:href="@{/courses/delete/{id}(id=${course.id})}"><i class="fas fa-trash-alt"></i></a>
+                <td><a href="#" th:href="@{/courses/{id}(id=${course.id})}"><i class="fas fa-info-circle"></i></a>
             </tr>
             </tbody>
         </table>

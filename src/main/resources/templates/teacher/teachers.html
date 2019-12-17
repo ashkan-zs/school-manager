@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/default">
+      layout:decorate="~{layouts/default}">
 <body>
 
 <div class="container" layout:fragment="content">
@@ -32,11 +32,11 @@
                 <td th:text="${classteacher.teacher.lastName}"></td>
                 <td th:text="${classteacher.classRoom.name}"></td>
                 <td th:text="${classteacher.isPrimaryTeacher}"></td>
-                <td><a href="#" th:href="@{/teachers/edit/{id}(id=classteacher.id)}"><i class="fas fa-edit"></i></a>
+                <td><a href="#" th:href="@{/teachers/edit/{id}(id=${classteacher.id})}"><i class="fas fa-edit"></i></a>
                 </td>
-                <td><a href="#" th:href="@{/teachers/delete/{id}(id=classteacher.id)}"><i class="fas fa-trash-alt"></i></a>
+                <td><a href="#" th:href="@{/teachers/delete/{id}(id=${classteacher.id})}"><i class="fas fa-trash-alt"></i></a>
                 </td>
-                <td><a href="#" th:href="@{/teachers/{id}(id=classteacher.id)}"><i class="fas fa-info-circle"></i></a>
+                <td><a href="#" th:href="@{/teachers/{id}(id=${classteacher.id})}"><i class="fas fa-info-circle"></i></a>
                 </td>
             </tr>
             </tbody>

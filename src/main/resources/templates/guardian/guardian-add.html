@@ -2,62 +2,64 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/default">
+      layout:decorate="~{layouts/default}">
 <body>
 
 <div class="col-md-6" layout:fragment="content">
     <form action="#" th:action="@{/guardians}" method="post" class="needs-validation" th:object="${guardian}">
-        <div class="form-group">
-            <label for="firstName" th:text="#{guardian.firstName}"></label>
-            <input type="text" th:field="*{firstName}" class="form-control" id="firstName" required>
-        </div>
+        <div th:fragment="form">
+            <div class="form-group">
+                <label for="firstName" th:text="#{guardian.firstName}"></label>
+                <input type="text" th:field="*{firstName}" class="form-control" id="firstName" required>
+            </div>
 
-        <div class="form-group">
-            <label for="lastName" th:text="#{guardian.lastName}"></label>
-            <input type="text" th:field="*{lastName}" class="form-control" id="lastName" required>
-        </div>
+            <div class="form-group">
+                <label for="lastName" th:text="#{guardian.lastName}"></label>
+                <input type="text" th:field="*{lastName}" class="form-control" id="lastName" required>
+            </div>
 
-        <div class="form-group">
-            <label for="nationalCode" th:text="#{guardian.nationalCode}"></label>
-            <input type="text" th:field="*{nationalCode}" class="form-control" id="nationalCode" required>
-        </div>
+            <div class="form-group">
+                <label for="nationalCode" th:text="#{guardian.nationalCode}"></label>
+                <input type="text" th:field="*{nationalCode}" class="form-control" id="nationalCode" required>
+            </div>
 
-        <div class="form-group">
-            <label for="idNumber" th:text="#{guardian.idNumber}"></label>
-            <input type="text" th:field="*{idNumber}" class="form-control" id="idNumber" required>
-        </div>
+            <div class="form-group">
+                <label for="idNumber" th:text="#{guardian.idNumber}"></label>
+                <input type="text" th:field="*{idNumber}" class="form-control" id="idNumber" required>
+            </div>
 
-        <div class="form-group">
-            <label for="email" th:text="#{guardian.email}"></label>
-            <input type="email" th:field="*{email}" class="form-control" id="email">
-        </div>
+            <div class="form-group">
+                <label for="email" th:text="#{guardian.email}"></label>
+                <input type="email" th:field="*{email}" class="form-control" id="email">
+            </div>
 
-        <div class="form-group">
-            <label for="mobile" th:text="#{guardian.mobile}"></label>
-            <input type="text" th:field="*{mobile}" class="form-control" id="mobile" required>
-        </div>
+            <div class="form-group">
+                <label for="mobile" th:text="#{guardian.mobile}"></label>
+                <input type="text" th:field="*{mobile}" class="form-control" id="mobile" required>
+            </div>
 
-        <div class="form-group">
-            <label for="phone" th:text="#{guardian.phone}"></label>
-            <input type="text" th:field="*{phone}" class="form-control" id="phone" required>
-        </div>
+            <div class="form-group">
+                <label for="phone" th:text="#{guardian.phone}"></label>
+                <input type="text" th:field="*{phone}" class="form-control" id="phone" required>
+            </div>
 
-        <div class="form-group">
-            <label for="address" th:text="#{guardian.address}"></label>
-            <textarea th:field="*{address}" class="form-control" id="address" required></textarea>
-        </div>
+            <div class="form-group">
+                <label for="address" th:text="#{guardian.address}"></label>
+                <textarea th:field="*{address}" class="form-control" id="address" required></textarea>
+            </div>
 
-        <div class="form-group">
-            <label for="user" th:text="#{guardian.user}"></label>
-            <select th:field="*{user}" id="user">
-                <option th:each="user : ${users}"
-                        th:value="${user.id}"
-                        th:text="${user.username}"></option>
-            </select>
-        </div>
+            <div class="form-group">
+                <label for="user" th:text="#{guardian.user}"></label>
+                <select th:field="*{user}" id="user">
+                    <option th:each="user : ${users}"
+                            th:value="${user.id}"
+                            th:text="${user.username}"></option>
+                </select>
+            </div>
 
-        <button type="submit" th:text="#{submit}" class="btn btn-success"></button>
-        <a href="#" th:href="@{/guardians}" th:text="#{cancel}" class="btn btn-danger"></a>
+            <button type="submit" th:text="#{submit}" class="btn btn-success"></button>
+            <a href="#" th:href="@{/guardians}" th:text="#{cancel}" class="btn btn-danger"></a>
+        </div>
     </form>
 </div>
 

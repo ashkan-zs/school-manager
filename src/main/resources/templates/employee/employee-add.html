@@ -2,87 +2,88 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/default">
+      layout:decorate="~{layouts/default}">
 <body>
 
 <div class="col-md-6" layout:fragment="content">
-    <form action="#" th:action="@{/employees}" th:object="${employee}" method="post" class="needs-validation">
+    <form action="#" th:action="@{/employees}" th:object="${employee}" method="post" class="needs-validation"
+          novalidate>
+        <div th:fragment="form">
+            <div class="form-group">
+                <label for="firstName" th:text="#{employee.firstName}"></label>
+                <input type="text" th:field="*{firstName}" id="firstName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName" th:text="#{employee.lastName}"></label>
+                <input type="text" th:field="*{lastName}" id="lastName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="nationalCode" th:text="#{employee.nationalCode}"></label>
+                <input type="text" th:field="*{nationalCode}" id="nationalCode" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="idNumber" th:text="#{employee.idNumber}"></label>
+                <input type="text" th:field="*{idNumber}" id="idNumber" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="personalId" th:text="#{employee.personalId}"></label>
+                <input type="text" th:field="*{personalId}" id="personalId" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="birthDate" th:text="#{employee.birthDate}"></label>
+                <input type="date" th:field="*{birthDate}" id="birthDate" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="hiredDate" th:text="#{employee.hiedDate}"></label>
+                <input type="date" th:field="*{hiredDate}" id="hiredDate" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="mobile" th:text="#{employee.mobile}"></label>
+                <input type="tel" th:field="*{mobile}" id="mobile" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="phone" th:text="#{employee.phone}"></label>
+                <input type="tel" th:field="*{phone}" id="phone" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="email" th:text="#{employee.email}"></label>
+                <input type="email" th:field="*{email}" id="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="address" th:text="#{employee.address}"></label>
+                <textarea th:field="*{address}" id="address" class="form-control"></textarea>
+            </div>
 
-        <div class="form-group">
-            <label for="firstName" th:text="#{employee.firstName}"></label>
-            <input type="text" th:field="*{firstName}" id="firstName" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="lastName" th:text="#{employee.lastName}"></label>
-            <input type="text" th:field="*{lastName}" id="lastName" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="nationalCode" th:text="#{employee.nationalCode}"></label>
-            <input type="text" th:field="*{nationalCode}" id="nationalCode" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="idNumber" th:text="#{employee.idNumber}"></label>
-            <input type="text" th:field="*{idNumber}" id="idNumber" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="personalId" th:text="#{employee.personalId}"></label>
-            <input type="text" th:field="*{personalId}" id="personalId" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="birthDate" th:text="#{employee.birthDate}"></label>
-            <input type="date" th:field="*{birthDate}" id="birthDate" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="hiredDate" th:text="#{employee.hiedDate}"></label>
-            <input type="date" th:field="*{hiredDate}" id="hiredDate" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="mobile" th:text="#{employee.mobile}"></label>
-            <input type="tel" th:field="*{mobile}" id="mobile" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="phone" th:text="#{employee.phone}"></label>
-            <input type="tel" th:field="*{phone}" id="phone" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="email" th:text="#{employee.email}"></label>
-            <input type="email" th:field="*{email}" id="email" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="address" th:text="#{employee.address}"></label>
-            <textarea th:field="*{address}" id="address" class="form-control"></textarea>
-        </div>
+            <div class="form-group">
+                <label for="title" th:text="#{employee.title}"></label>
+                <select th:field="*{title}" id="title" class="form-control" required>
+                    <option th:each="title : ${titles}"
+                            th:value="${title.id}"
+                            th:text="${title.title}"></option>
+                </select>
+            </div>
 
-        <div class="form-group">
-            <label for="title" th:text="#{employee.title}"></label>
-            <select th:field="*{title}" id="title" class="form-control" required>
-                <option th:each="title : ${titles}"
-                        th:value="${title.id}"
-                        th:text="${title.title}"></option>
-            </select>
+            <div class="form-group">
+                <label for="school" th:text="#{employee.school}"></label>
+                <select th:field="*{school}" id="school" class="form-control" required>
+                    <option th:each="school : ${schools}"
+                            th:value="${school.id}"
+                            th:text="${school.name}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="user" th:text="#{employee.user}"></label>
+                <select th:field="*{user}" id="user" class="form-control" required>
+                    <option th:each="user : ${users}"
+                            th:value="${user.id}"
+                            th:text="${user.username}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn  btn-success" th:text="#{submit}"></button>
+            <a href="#" th:href="@{/employees}" class="btn btn-danger" th:text="#{cancel}"></a>
         </div>
-
-        <div class="form-group">
-            <label for="school" th:text="#{employee.school}"></label>
-            <select th:field="*{school}" id="school" class="form-control" required>
-                <option th:each="school : ${schools}"
-                        th:value="${school.id}"
-                        th:text="${school.name}"></option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="user" th:text="#{employee.user}"></label>
-            <select th:field="*{user}" id="user" class="form-control" required>
-                <option th:each="user : ${users}"
-                        th:value="${user.id}"
-                        th:text="${user.username}"></option>
-            </select>
-        </div>
-
-        <button type="submit" class="btn  btn-success" th:text="#{submit}"></button>
-        <a href="#" th:href="@{/employees}" class="btn btn-danger" th:text="#{cancel}"></a>
-
     </form>
 </div>
 

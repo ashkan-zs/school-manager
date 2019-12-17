@@ -77,7 +77,7 @@ public class StudentLeaveRequestController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateStudentLeave(@PathVariable Long id, BindingResult result, @ModelAttribute @Valid StudentLeaveRequest studentLeave) {
+    public String updateStudentLeave(@PathVariable Long id, @ModelAttribute @Valid StudentLeaveRequest studentLeave, BindingResult result) {
 
         if (result.hasErrors()) {
             studentLeave.setId(id);

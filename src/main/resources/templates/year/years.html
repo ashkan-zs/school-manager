@@ -31,7 +31,7 @@
                 <td th:text="${year.name}">name</td>
                 <td th:text="${year.fromYear}">from year</td>
                 <td th:text="${year.toYear}">to year</td>
-                <td th:text="${year.school}">school</td>
+                <td th:text="${year.school.name}">school</td>
                 <td><a th:href="@{/years/edit/{id}(id=${year.id})}"><i class="fas fa-edit"></i></a></td>
                 <td><a th:href="@{/years/delete/{id}(id=${year.id})}"><i class="fas fa-trash-alt"></i></a></td>
                 <td><a th:href="@{/years/{id}(id=${year.id})}"><i class="fas fa-info-circle"></i></a></td>

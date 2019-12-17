@@ -4,6 +4,7 @@ import com.sanatkar.schoolerp.model.entity.ClassTeacher;
 import com.sanatkar.schoolerp.model.repository.ClassRoomDao;
 import com.sanatkar.schoolerp.model.repository.ClassTeacherDao;
 import com.sanatkar.schoolerp.model.repository.EmployeeDao;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping("/teachers")
+@Log4j2
 public class ClassTeacherController {
 
     private ClassTeacherDao classTeacherDao;
@@ -76,8 +78,8 @@ public class ClassTeacherController {
         return "teacher/teacher-edit";
     }
 
-    @PostMapping("/edit/{id}")
-    public String updateTeacher(@PathVariable Long id, BindingResult result, @ModelAttribute @Valid ClassTeacher teacher) {
+    @PostMapping("/edit/{id}") // the order of @PathVariable and @ModelAttribute is important :|
+    public String updateTeacher(@PathVariable Long id, @ModelAttribute @Valid ClassTeacher teacher, BindingResult result) {
 
         if (result.hasErrors()) {
             teacher.setId(id);

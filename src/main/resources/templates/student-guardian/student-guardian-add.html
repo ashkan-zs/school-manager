@@ -2,56 +2,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/default">
+      layout:decorate="~{layouts/default}">
 <body>
 
 <div class="col-md-6" layout:fragment="content">
     <form class="needs-validation" action="#" th:action="@{/studetnGuardians}" method="post"
           th:object="${studentGuardian}">
-        <div class="form-group">
-            <label th:text="#{studentGuardian.student}" for="student"></label>
-            <select class="form-control" th:field="*{student}" id="student">
-                <option th:each="student : ${students}"
-                        th:value="${student.id}"
-                        th:text="${student.firstName}"></option>
-            </select>
+        <div th:fragment="form">
+            <div class="form-group">
+                <label th:text="#{studentGuardian.student}" for="student"></label>
+                <select class="form-control" th:field="*{student}" id="student">
+                    <option th:each="student : ${students}"
+                            th:value="${student.id}"
+                            th:text="${student.firstName + ' ' + student.lastName}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label th:text="#{studentGuardian.guardian}" for="guardian"></label>
+                <select class="form-control" th:field="*{guardian}" id="guardian">
+                    <option th:each="guardian : ${guardians}"
+                            th:value="${guardian.id}"
+                            th:text="${guardian.firstName + ' ' + guardian.lastName}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="relation" th:text="#{studentGuardian.relation}"></label>
+                <input type="text" th:field="*{relation}" id="relation" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-success" th:text="#{submit}"></button>
+            <a href="#" th:href="@{/studentGuardians}" class="btn btn-danger" th:text="#{cancel}"></a>
         </div>
-        <div class="form-group">
-            <label th:text="#{studentGuardian.guardian}" for="guardian"></label>
-            <select class="form-control" th:field="*{guardian}" id="guardian">
-                <option th:each="guardian : ${guardians}"
-                        th:value="${guardian.id}"
-                        th:text="${guardian.firstName}"></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="relation" th:text="#{studentGuardian.relation}"></label>
-            <input type="text" th:field="*{relation}" id="relation" class="form-control" required>
-        </div>
+
     </form>
-
-    <button type="submit" class="btn btn-success" th:text="#{submit}"></button>
-    <a href="#" th:href="@{/studentGuardians}" class="btn btn-danger" th:text="#{cancel}"></a>
 </div>
-
-
-<script>
-    (function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
 
 </body>
 </html>

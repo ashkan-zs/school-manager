@@ -3,6 +3,7 @@ package com.sanatkar.schoolerp.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -64,14 +65,17 @@ public class Employee implements Serializable {
     @OneToMany(mappedBy = "teacher")
     private List<ClassTeacher> classTeachers = new ArrayList<>();
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("employees")
     private JobTitle title;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("employees")
     private School school;
 
+    @ToString.Exclude
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_login_id")
     private User user;

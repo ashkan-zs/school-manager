@@ -2,6 +2,7 @@ package com.sanatkar.schoolerp.model.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -50,6 +51,7 @@ public class Guardian implements Serializable {
     @OneToMany(mappedBy = "guardian")
     private List<StudentsGuardian> studentsGuardians = new ArrayList<>();
 
+    @ToString.Exclude
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_login_id")
     private User user;

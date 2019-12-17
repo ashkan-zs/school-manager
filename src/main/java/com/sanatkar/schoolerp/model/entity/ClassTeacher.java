@@ -3,6 +3,7 @@ package com.sanatkar.schoolerp.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,10 +29,12 @@ public class ClassTeacher implements Serializable {
     @Column(name = "is_primary_teacher")
     private Boolean isPrimaryTeacher;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("teachers")
     private ClassRoom classRoom;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("classTeachers")
     private Employee teacher;

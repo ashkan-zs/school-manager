@@ -2,26 +2,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/default">
+      layout:decorate="~{layouts/default}">
 <body>
 
 <div class="col-md-6" layout:fragment="content">
-    <form action="#" th:action="@{/jobs}" th:object="${job}" class="needs-validation">
-        <div class="form-group">
-            <label for="title" th:text="#{job.title}"></label>
-            <input type="text" id="title" class="form-control" th:field="*{title}" required>
-        </div>
-        <div class="form-group">
-            <label for="authority" th:text="#{job.role}"></label>
-            <select class="form-control" th:field="*{role}" id="authority">
-                <option th:each="authority : ${auths}"
-                        th:value="${authority.id}"
-                        th:text="#{${authority.name}}"></option>
-            </select>
-        </div>
+    <form action="#" th:action="@{/jobs}" th:object="${job}" method="post" class="needs-validation">
+        <div th:fragment="form">
+            <div class="form-group">
+                <label for="title" th:text="#{job.title}"></label>
+                <input type="text" id="title" class="form-control" th:field="*{title}" required>
+            </div>
+            <div class="form-group">
+                <label for="authority" th:text="#{job.role}"></label>
+                <select class="form-control" th:field="*{role}" id="authority">
+                    <option th:each="authority : ${auths}"
+                            th:value="${authority.name}"
+                            th:text="#{${authority.name}}"></option>
+                </select>
+            </div>
 
-        <button type="submit" class="btn btn-success" th:text="#{submit}">submit</button>
-        <a href="#" th:href="@{/jobs}" class="btn btn-danger" th:text="#{cancel}">cancel</a>
+            <button type="submit" class="btn btn-success" th:text="#{submit}">submit</button>
+            <a href="#" th:href="@{/jobs}" class="btn btn-danger" th:text="#{cancel}">cancel</a>
+        </div>
     </form>
 </div>
 

@@ -3,14 +3,27 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      layout:decorator="layouts/default">
+      layout:decorate="~{layouts/default}">
 <body>
 
 <div layout:fragment="content">
     <h1>from Home page</h1>
     <h1>به صفحه‌ی اصلی خوش آمدید.</h1>
     <p th:text="${#authentication.getPrincipal()}"></p>
-    <div sec:authorize="hasRole('ROLE_ADMIN')">قابل مشاهده برای کاربر با دسترسی مدیر (ROLE_ADMIN)</div>
+
+    Logged user: <span sec:authentication="name"></span>
+    Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+
+    <div sec:authorize="isAuthenticated()">
+        This content is only shown to authenticated users.
+    </div>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        This content is only shown to administrators.
+    </div>
+    <div sec:authorize="hasRole('ROLE_USER')">
+        This content is only shown to users.
+    </div>
+
 </div>
 
 </body>

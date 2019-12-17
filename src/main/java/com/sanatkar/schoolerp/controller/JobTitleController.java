@@ -71,7 +71,7 @@ public class JobTitleController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateJob(@PathVariable Long id, BindingResult result, @ModelAttribute @Valid JobTitle job) {
+    public String updateJob(@PathVariable Long id, @ModelAttribute @Valid JobTitle job, BindingResult result) {
 
         if (result.hasErrors()) {
             job.setId(id);

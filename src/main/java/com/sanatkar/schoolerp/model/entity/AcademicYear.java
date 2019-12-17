@@ -3,6 +3,7 @@ package com.sanatkar.schoolerp.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -37,6 +38,7 @@ public class AcademicYear implements Serializable {
     @Column(name = "to_year")
     private LocalDate toYear;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("academicYears")
     private School school;

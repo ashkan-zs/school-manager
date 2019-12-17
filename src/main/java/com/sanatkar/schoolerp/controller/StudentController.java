@@ -2,6 +2,8 @@ package com.sanatkar.schoolerp.controller;
 
 import com.sanatkar.schoolerp.model.entity.*;
 import com.sanatkar.schoolerp.model.repository.*;
+import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import java.util.Optional;
  */
 @Controller
 @RequestMapping("/students")
+@Log4j2
 public class StudentController {
 
     private StudentDao studentDao;
@@ -36,8 +39,8 @@ public class StudentController {
     @GetMapping("/{id}")
     public String getStudent(@PathVariable Long id, Model model, Authentication authentication) {
 
-        User user = (User) authentication.getPrincipal();
-        System.out.println(user.getId() + " " + user.getAuthorities());
+//        User user = (User) authentication.getPrincipal();
+//        System.out.println(user.getId() + " " + user.getAuthorities());
 
         studentDao.findById(id)
                 .ifPresent(o -> model.addAttribute("student", o));
@@ -50,14 +53,15 @@ public class StudentController {
 
 
         UserDetailsImp user = (UserDetailsImp) authentication.getPrincipal();
+        log.info("current username is: " + user.getUsername());
         Employee teacher = employeeDao.findByUser(user.getUser());
-        System.out.println(teacher);
+        log.info("teacher name" + user.getUser());
 
         // TODO: check user role if it's admin show all students
         if (request.isUserInRole("ADMIN")) {
             model.addAttribute("students", studentDao.findAll());
         } else {
-//            model.addAttribute("students", studentDao.findByClassRoom());
+            model.addAttribute("students", studentDao.findAll());
         }
 
         return "student/students";
@@ -90,6 +94,9 @@ public class StudentController {
         Student student = studentDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid student id: " + id));
         model.addAttribute("student", student);
+        model.addAttribute("schools", schoolDao.findAll());
+        model.addAttribute("levels", levelDao.findAll());
+        model.addAttribute("classes", classRoomDao.findAll());
 
         return "student/student-edit";
     }

@@ -65,7 +65,7 @@ public class EducationLevelController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateLevel(@PathVariable Long id, BindingResult result, @ModelAttribute @Valid EducationLevel level) {
+    public String updateLevel(@PathVariable Long id, @ModelAttribute @Valid EducationLevel level, BindingResult result) {
 
         if (result.hasErrors()) {
             level.setId(id);

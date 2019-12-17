@@ -3,6 +3,7 @@ package com.sanatkar.schoolerp.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -32,10 +33,12 @@ public class StudentAttendance implements Serializable {
     @Column(name = "absence_date")
     private LocalDate absenceDate;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("studentAttendances")
     private AcademicYear year;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("studentAttendances")
     private Student student;

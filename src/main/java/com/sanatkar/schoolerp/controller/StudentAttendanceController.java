@@ -77,7 +77,7 @@ public class StudentAttendanceController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateAbsence(@PathVariable Long id, BindingResult result, @ModelAttribute @Valid StudentAttendance absence) {
+    public String updateAbsence(@PathVariable Long id, @ModelAttribute @Valid StudentAttendance absence, BindingResult result) {
 
         if (result.hasErrors()) {
             absence.setId(id);

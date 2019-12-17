@@ -73,7 +73,7 @@ public class ClassRoomController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateClass(@PathVariable Long id, BindingResult result, @ModelAttribute @Valid ClassRoom classRoom) {
+    public String updateClass(@PathVariable Long id, @ModelAttribute @Valid ClassRoom classRoom, BindingResult result) {
 
         if (result.hasErrors()) {
             classRoom.setId(id);

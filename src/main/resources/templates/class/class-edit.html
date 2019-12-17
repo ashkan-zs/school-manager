@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/default">
+      layout:decorate="~{layouts/default}">
 <body>
 
 <div class="col-md-6" layout:fragment="content">
-    <form class="needs-validation" action="#" th:action="@{/classes/edit/{id}(id=${class.id})}" method="post" th:object="*{class}">
-
+    <form class="needs-validation" action="#" th:action="@{/classes/edit/{id}(id=${class.id})}" method="post"
+          th:object="${class}">
         <div class="form-group">
             <label for="name" th:text="#{class.name}">name</label>
             <input class="form-control" type="text" th:field="*{name}" id="name">

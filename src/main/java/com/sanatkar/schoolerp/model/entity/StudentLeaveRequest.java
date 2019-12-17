@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sanatkar.schoolerp.model.entity.enumeration.LeaveStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -37,10 +38,12 @@ public class StudentLeaveRequest implements Serializable {
     @Column(name = "status")
     private LeaveStatus status;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("studentLeaveRequests")
     private Student student;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("studentLeaveRequests")
     private Guardian guardian;

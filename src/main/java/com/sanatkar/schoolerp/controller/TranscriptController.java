@@ -82,7 +82,7 @@ public class TranscriptController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateTranscript(@PathVariable Long id, BindingResult result, @ModelAttribute @Valid Transcript transcript) {
+    public String updateTranscript(@PathVariable Long id, @ModelAttribute @Valid Transcript transcript, BindingResult result) {
 
         if (result.hasErrors()) {
             transcript.setId(id);

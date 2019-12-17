@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<body>
+<!--TODO: create edit and detail page for users-->
+<div class="container" layout:fragment="content">
+    <a th:href="@{/users/add}" class="btn btn-labeled btn-success">
+        <span class="btn-label">
+            <i class="fas fa-plus fa-align-right"></i>
+        </span>
+        <span th:text="#{user.add}"></span>
+    </a>
+    <h2 th:if="${users.isEmpty()}" th:text="#{user.empty}"></h2>
+    <div th:unless="${users.isEmpty()}" class="table-responsive">
+        <table th:unless="${users.isEmpty()}" class="table table-striped">
+            <thead class="thead-light">
+            <tr>
+                <td th:text="#{user.username}">Username</td>
+                <td th:text="#{user.createDate}">Create Date</td>
+                <td th:text="#{user.role}">Role</td>
+                <td th:text="#{user.active}">is Active</td>
+                <td th:text="#{user.lock}">is Lock</td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.username}">Username</td>
+                <td th:text="${user.createDate}">Create Date</td>
+                <td th:each="auth : ${user.authorities}">
+                    <span th:text="#{${auth.name}}"></span>
+                </td>
+                <td th:text="${user.active}">is Active</td>
+                <td th:text="${user.locked}">is Lock</td>
+                <td><a th:href="@{/users/edit/{id}(id=${user.id})}"><i class="fas fa-edit"></i></a></td>
+                <td><a th:href="@{/users/delete/{id}(id=${user.id})}"><i class="fas fa-trash-alt"></i></a></td>
+                <td><a th:href="@{/users/{id}(id=${user.id})}"><i class="fas fa-info-circle"></i></a></td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

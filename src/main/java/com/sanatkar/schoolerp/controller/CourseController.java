@@ -65,7 +65,7 @@ public class CourseController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateCourse(@PathVariable Long id, BindingResult result, @ModelAttribute @Valid Course course) {
+    public String updateCourse(@PathVariable Long id, @ModelAttribute @Valid Course course, BindingResult result) {
 
         if (result.hasErrors()) {
             course.setId(id);

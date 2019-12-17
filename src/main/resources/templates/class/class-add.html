@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/default">
+      layout:decorate="~{layouts/default}">
 <body>
 
 <div class="container" layout:fragment="content">
@@ -10,28 +10,29 @@
         <div class="col-md-6">
             <form class="needs-validation" novalidate method="post" action="#" th:action="@{/classes}"
                   th:object="${classRoom}">
+                <div th:fragment="form">
+                    <div class="form-group">
+                        <label for="name" th:text="#{class.name}">name</label>
+                        <input class="form-control" type="text" th:field="*{name}" id="name">
+                    </div>
 
-                <div class="form-group">
-                    <label for="name" th:text="#{class.name}">name</label>
-                    <input class="form-control" type="text" th:field="*{name}" id="name">
+                    <div class="form-group">
+                        <label for="capacity" th:text="#{class.capacity}">capacity</label>
+                        <input class="form-control" type="text" th:field="*{capacity}" id="capacity">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="school" th:text="#{class.school}">school</label>
+                        <select class="form-control" th:field="*{school}" id="school">
+                            <option th:each="school : ${schools}"
+                                    th:value="${school.id}"
+                                    th:text="${school.name}"></option>
+                        </select>
+                    </div>
+
+                    <input type="submit" th:value="#{submit}" value="submit" class="btn btn-success"/>
+                    <a href="#" th:href="@{/classes}" class="btn btn-danger" th:text="#{cancel}"></a>
                 </div>
-
-                <div class="form-group">
-                    <label for="capacity" th:text="#{class.capacity}">capacity</label>
-                    <input class="form-control" type="text" th:field="*{capacity}" id="capacity">
-                </div>
-
-                <div class="form-group">
-                    <label for="school" th:text="#{class.school}">school</label>
-                    <select class="form-control" th:field="*{school}" id="school">
-                        <option th:each="school : ${schools}"
-                                th:value="${school.id}"
-                                th:text="${school.name}"></option>
-                    </select>
-                </div>
-
-                <input type="submit" th:value="#{submit}" value="submit" class="btn btn-success"/>
-                <a href="#" th:href="@{/classes}" class="btn btn-danger" th:text="#{cancel}"></a>
             </form>
         </div>
     </div>

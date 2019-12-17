@@ -72,7 +72,7 @@ public class AcademicYearController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateYear(@PathVariable Long id, BindingResult result, @ModelAttribute @Valid AcademicYear year) {
+    public String updateYear(@PathVariable Long id, @ModelAttribute @Valid AcademicYear year, BindingResult result) {
 
         if (result.hasErrors()) {
             year.setId(id);
