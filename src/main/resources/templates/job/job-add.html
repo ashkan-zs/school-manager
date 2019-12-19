@@ -15,9 +15,9 @@
             <div class="form-group">
                 <label for="authority" th:text="#{job.role}"></label>
                 <select class="form-control" th:field="*{role}" id="authority">
-                    <option th:each="authority : ${auths}"
-                            th:value="${authority.name}"
-                            th:text="#{${authority.name}}"></option>
+                    <option th:each="role : ${auths}"
+                            th:value="${role.name}"
+                            th:text="#{${role.name}}"></option>
                 </select>
             </div>
 

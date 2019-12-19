@@ -8,12 +8,11 @@
 </head>
 <body>
 <div class="wrapper">
-    <!--Page Content-->sec:authorize="hasRole('ROLE_ADMIN')
+    <!--Page Content-->
     <div id="home-content">
         <nav id="sideMenu" class="">
-            <div th:switch="${#authorization }">
-
-            </div>
+            <div sec:authorize="hasRole('ADMIN')" th:replace="~{fragments/admin :: menu}"></div>
+            <div sec:authorize="hasRole('USER')" th:replace="~{fragments/user :: menu}"></div>
         </nav>
         <!--Content of page will replace here-->
         <div id="mainContent" layout:fragment="content"></div>

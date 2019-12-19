@@ -1,12 +1,13 @@
 package com.sanatkar.schoolerp.model.entity;
 
-import com.sanatkar.schoolerp.model.entity.enumeration.AuthorityType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Create by ashkan on 2019/06/15
@@ -15,7 +16,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @Entity
-public class Authority implements Serializable {
+public class Role implements Serializable {
 
     private static final long serialVersionUID = 6260063799131599967L;
 
@@ -27,7 +28,15 @@ public class Authority implements Serializable {
 //    @Enumerated(EnumType.STRING)
     private String name;
 
-    public Authority(@NotNull String name) {
-        this.name = name;
-    }
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "roles_privileges",
+            joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id")
+    )
+    private List<Privilege> privileges;
+
 }

@@ -2,7 +2,7 @@ package com.sanatkar.schoolerp.controller;
 
 import com.sanatkar.schoolerp.controller.dto.UserRegistrationDto;
 import com.sanatkar.schoolerp.model.entity.User;
-import com.sanatkar.schoolerp.model.repository.AuthorityDao;
+import com.sanatkar.schoolerp.model.repository.RoleDao;
 import com.sanatkar.schoolerp.model.repository.UserDao;
 import com.sanatkar.schoolerp.model.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -21,12 +21,12 @@ public class UserRegistrationController {
 
     private UserService userService;
     private UserDao userDao;
-    private AuthorityDao authorityDao;
+    private RoleDao roleDao;
 
-    public UserRegistrationController(UserService userService, UserDao userDao, AuthorityDao authorityDao) {
+    public UserRegistrationController(UserService userService, UserDao userDao, RoleDao roleDao) {
         this.userService = userService;
         this.userDao = userDao;
-        this.authorityDao = authorityDao;
+        this.roleDao = roleDao;
     }
 
     @ModelAttribute("user")
@@ -55,7 +55,7 @@ public class UserRegistrationController {
     @GetMapping("/add")
     public String showRegisterForm(Model model) {
 
-        model.addAttribute("auths", authorityDao.findAll());
+        model.addAttribute("auths", roleDao.findAll());
 
         return "user/user-add";
     }

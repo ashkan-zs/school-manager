@@ -1,7 +1,7 @@
 package com.sanatkar.schoolerp.controller.dto;
 
 import com.sanatkar.schoolerp.constraint.FieldMatch;
-import com.sanatkar.schoolerp.model.entity.Authority;
+import com.sanatkar.schoolerp.model.entity.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,5 +35,5 @@ public class UserRegistrationDto {
     @NotNull
     private boolean active;
 
-    private List<Authority> authority;
+    private List<Role> role;
 }

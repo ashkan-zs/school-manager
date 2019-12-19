@@ -17,11 +17,14 @@
     <div sec:authorize="isAuthenticated()">
         This content is only shown to authenticated users.
     </div>
-    <div sec:authorize="hasRole('ROLE_ADMIN')">
-        This content is only shown to administrators.
+    <div sec:authorize="hasAuthority('WRITE_PRIVILEGE')">
+        hasAuthority('WRITE_PRIVILEGE')
     </div>
-    <div sec:authorize="hasRole('ROLE_USER')">
-        This content is only shown to users.
+    <div sec:authorize="hasRole('ADMIN')">
+        hasRole('ROLE_ADMIN')
+    </div>
+    <div sec:authorize="hasRole('USER')">
+        hasRole('ROLE_USER')
     </div>
 
 </div>

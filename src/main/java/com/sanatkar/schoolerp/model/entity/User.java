@@ -3,6 +3,7 @@ package com.sanatkar.schoolerp.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -35,6 +36,7 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDateTime createDate;
 
     @NotNull
@@ -43,13 +45,13 @@ public class User implements Serializable {
 
     @NotNull
     @Column(nullable = false)
-    private boolean locked = false;
+    private boolean locked = false; // lock
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_authority",
+    @JoinTable(name = "users_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
-    private List<Authority> authorities = new ArrayList<>();
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+    private List<Role> roles = new ArrayList<>();
 
 }

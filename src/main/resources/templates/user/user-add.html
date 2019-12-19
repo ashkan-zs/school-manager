@@ -62,10 +62,10 @@
                 </div>
                 <div class="form-group">
                     <label for="authority" th:text="#{user.role}">Role</label>
-                    <select multiple class="form-control" th:field="*{authority}" id="authority">
-                        <option th:each="authority : ${auths}"
-                                th:value="${authority.id}"
-                                th:text="#{${authority.name}}"></option>
+                    <select multiple class="form-control" th:field="*{role}" id="authority">
+                        <option th:each="role : ${auths}"
+                                th:value="${role.id}"
+                                th:text="#{${role.name}}"></option>
                     </select>
                 </div>
                 <div class="form-group"
