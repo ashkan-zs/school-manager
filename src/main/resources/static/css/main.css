@@ -41,6 +41,7 @@ body {
     min-width: 210px;
     min-height: 100vh;
     background: #232528;
+    color: #eaf6ff;
     -webkit-box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.75);
@@ -49,14 +50,12 @@ body {
 #sideMenu h3 {
     margin: 0;
     padding: 0.5rem;
-    color: #eaf6ff;
     /*border-bottom: 1px solid rgba(94, 94, 94, 0.89);*/
 }
 
 #sideMenu li {
     width: 100%;
     padding: 0 0.5rem;
-    color: #eaf6ff;
     transition: color 0.1s, padding 0.4s ease;
     /*border-bottom: 1px solid black;*/
 }

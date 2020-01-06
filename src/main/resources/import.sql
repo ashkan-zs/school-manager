@@ -1,5 +1,67 @@
--- insert user roles to database
--- insert into authority (name) values ('ROLE_ADMIN')
--- insert into role (name) values ('ROLE_MANAGER')
--- insert into role (name) values ('ROLE_TEACHER')
--- insert into role (name) values ('ROLE_USER')
+-- insert privileges to database
+INSERT INTO privilege (name) VALUES ('ALL_PRIVILEGE');
+INSERT INTO privilege (name) VALUES ('ADD_USER');
+INSERT INTO privilege (name) VALUES ('EDIT_USER');
+INSERT INTO privilege (name) VALUES ('DELETE_USER');
+INSERT INTO privilege (name) VALUES ('SHOW_USER');
+INSERT INTO privilege (name) VALUES ('ADD_STUDENT');
+INSERT INTO privilege (name) VALUES ('EDIT_STUDENT');
+INSERT INTO privilege (name) VALUES ('DELETE_STUDENT');
+INSERT INTO privilege (name) VALUES ('SHOW_STUDENT');
+INSERT INTO privilege (name) VALUES ('ADD_CLASS');
+INSERT INTO privilege (name) VALUES ('EDIT_CLASS');
+INSERT INTO privilege (name) VALUES ('DELETE_CLASS');
+INSERT INTO privilege (name) VALUES ('SHOW_CLASS');
+INSERT INTO privilege (name) VALUES ('ADD_EMPLOYEE');
+INSERT INTO privilege (name) VALUES ('EDIT_EMPLOYEE');
+INSERT INTO privilege (name) VALUES ('DELETE_EMPLOYEE');
+INSERT INTO privilege (name) VALUES ('SHOW_EMPLOYEE');
+INSERT INTO privilege (name) VALUES ('ADD_COURSE');
+INSERT INTO privilege (name) VALUES ('EDIT_COURSE');
+INSERT INTO privilege (name) VALUES ('DELETE_COURSE');
+INSERT INTO privilege (name) VALUES ('SHOW_COURSE');
+INSERT INTO privilege (name) VALUES ('ADD_SCHOOL');
+INSERT INTO privilege (name) VALUES ('EDIT_SCHOOL');
+INSERT INTO privilege (name) VALUES ('DELETE_SCHOOL');
+INSERT INTO privilege (name) VALUES ('SHOW_SCHOOL');
+INSERT INTO privilege (name) VALUES ('ADD_ROLLCALL');
+INSERT INTO privilege (name) VALUES ('EDIT_ROLLCALL');
+INSERT INTO privilege (name) VALUES ('DELETE_ROLLCALL');
+INSERT INTO privilege (name) VALUES ('SHOW_ROLLCALL');
+INSERT INTO privilege (name) VALUES ('ADD_GUARDIAN');
+INSERT INTO privilege (name) VALUES ('EDIT_GUARDIAN');
+INSERT INTO privilege (name) VALUES ('DELETE_GUARDIAN');
+INSERT INTO privilege (name) VALUES ('SHOW_GUARDIAN');
+INSERT INTO privilege (name) VALUES ('ADD_JOB');
+INSERT INTO privilege (name) VALUES ('EDIT_JOB');
+INSERT INTO privilege (name) VALUES ('DELETE_JOB');
+INSERT INTO privilege (name) VALUES ('SHOW_JOB');
+INSERT INTO privilege (name) VALUES ('ADD_LEAVE');
+INSERT INTO privilege (name) VALUES ('EDIT_LEAVE');
+INSERT INTO privilege (name) VALUES ('DELETE_LEAVE');
+INSERT INTO privilege (name) VALUES ('SHOW_LEAVE');
+INSERT INTO privilege (name) VALUES ('ADD_ROLE');
+INSERT INTO privilege (name) VALUES ('EDIT_ROLE');
+INSERT INTO privilege (name) VALUES ('DELETE_ROLE');
+INSERT INTO privilege (name) VALUES ('SHOW_ROLE');
+INSERT INTO privilege (name) VALUES ('ADD_GRADE');
+INSERT INTO privilege (name) VALUES ('EDIT_GRADE');
+INSERT INTO privilege (name) VALUES ('DELETE_GRADE');
+INSERT INTO privilege (name) VALUES ('SHOW_GRADE');
+INSERT INTO privilege (name) VALUES ('ADD_TEACHER');
+INSERT INTO privilege (name) VALUES ('EDIT_TEACHER');
+INSERT INTO privilege (name) VALUES ('DELETE_TEACHER');
+INSERT INTO privilege (name) VALUES ('SHOW_TEACHER');
+INSERT INTO privilege (name) VALUES ('ADD_YEAR');
+INSERT INTO privilege (name) VALUES ('EDIT_YEAR');
+INSERT INTO privilege (name) VALUES ('DELETE_YEAR');
+INSERT INTO privilege (name) VALUES ('SHOW_YEAR');
+INSERT INTO privilege (name) VALUES ('ADD_TRANSCRIPT');
+INSERT INTO privilege (name) VALUES ('EDIT_TRANSCRIPT');
+INSERT INTO privilege (name) VALUES ('DELETE_TRANSCRIPT');
+INSERT INTO privilege (name) VALUES ('SHOW_TRANSCRIPT');
+INSERT INTO privilege (name) VALUES ('ADD_STUDENT_GUARDIAN');
+INSERT INTO privilege (name) VALUES ('EDIT_STUDENT_GUARDIAN');
+INSERT INTO privilege (name) VALUES ('DELETE_STUDENT_GUARDIAN');
+INSERT INTO privilege (name) VALUES ('SHOW_STUDENT_GUARDIAN');
+

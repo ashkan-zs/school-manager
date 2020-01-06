@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,7 +13,9 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-public class Privilege {
+public class Privilege implements Serializable {
+
+    private static final long serialVersionUID = 4222243258741914334L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +23,6 @@ public class Privilege {
 
     private String name;
 
-    @ManyToMany(mappedBy = "privileges")
-    private List<Role> roles;
+    @OneToMany(mappedBy = "privilege")
+    private List<RolePrivilege> rolePrivileges;
 }

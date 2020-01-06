@@ -1,7 +1,6 @@
 package com.sanatkar.schoolerp.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sanatkar.schoolerp.model.entity.enumeration.MarkType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,14 +30,10 @@ public class EducationLevel implements Serializable {
     @Column(name = "base")
     private String base;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "mark_type")
-    private MarkType markType;
-
     @OneToMany(mappedBy = "level")
     private List<Student> students = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "levels")
+    @OneToMany(mappedBy = "educationLevel")
     @JsonIgnore
-    private List<Course> courses = new ArrayList<>();
+    private List<CourseLevel> courseLevels;
 }

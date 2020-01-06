@@ -46,31 +46,36 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         }
 
         Privilege readPrivilege = createPrivilegeIfNotFound("READ_PRIVILEGE");
-        Privilege writePrivilege = createPrivilegeIfNotFound("WRITE_PRIVILEGE");
+        Privilege allPrivilege = createPrivilegeIfNotFound("ALL_PRIVILEGE");
 
-        List<Privilege> adminPrivilege = Arrays.asList(readPrivilege, writePrivilege);
+        List<Privilege> adminPrivilege = Arrays.asList(allPrivilege);
 
         createRoleIfNotFound("ROLE_ADMIN", adminPrivilege);
         createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege));
 
-        Role adminRole = roleDao.findByName("ROLE_ADMIN");
-        User user = new User();
-        user.setUsername("admin");
-        user.setPassword(passwordEncoder.encode("admin"));
-        user.setCreateDate(LocalDateTime.now());
-        user.setActive(true);
-        user.setRoles(Arrays.asList(adminRole));
-        userDao.save(user);
+        User admin = userDao.findByUsername("admin");
+        if (admin == null) {
+            Role adminRole = roleDao.findByName("ROLE_ADMIN");
+            User user = new User();
+            user.setUsername("admin");
+            user.setPassword(passwordEncoder.encode("admin"));
+            user.setCreateDate(LocalDateTime.now());
+            user.setActive(true);
+            user.setRoles(Arrays.asList(adminRole));
+            userDao.save(user);
+        }
 
-        Role userRole = roleDao.findByName("ROLE_USER");
-        User user1 = new User();
-        user1.setUsername("user");
-        user1.setPassword(passwordEncoder.encode("user"));
-        user1.setCreateDate(LocalDateTime.now());
-        user1.setActive(true);
-        user1.setRoles(Arrays.asList(userRole));
-        userDao.save(user1);
-
+        User user = userDao.findByUsername("user");
+        if (user == null) {
+            Role userRole = roleDao.findByName("ROLE_USER");
+            User user1 = new User();
+            user1.setUsername("user");
+            user1.setPassword(passwordEncoder.encode("user"));
+            user1.setCreateDate(LocalDateTime.now());
+            user1.setActive(true);
+            user1.setRoles(Arrays.asList(userRole));
+            userDao.save(user1);
+        }
         alreadySetup = false;
     }
 

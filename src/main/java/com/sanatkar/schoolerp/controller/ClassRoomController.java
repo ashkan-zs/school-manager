@@ -3,6 +3,7 @@ package com.sanatkar.schoolerp.controller;
 import com.sanatkar.schoolerp.model.entity.ClassRoom;
 import com.sanatkar.schoolerp.model.repository.ClassRoomDao;
 import com.sanatkar.schoolerp.model.repository.SchoolDao;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,7 @@ public class ClassRoomController {
         this.schoolDao = schoolDao;
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('SHOW_CLASS')")
     @GetMapping
     public String getClasses(Model model) {
 
@@ -33,6 +35,7 @@ public class ClassRoomController {
         return "class/classes";
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('SHOW_CLASS')")
     @GetMapping("/{id}")
     public String getClass(@PathVariable Long id, Model model) {
 
@@ -42,6 +45,7 @@ public class ClassRoomController {
         return "class/class-detail";
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('ADD_CLASS')")
     @GetMapping("/add")
     public String addClass(@ModelAttribute("classRoom") ClassRoom classRoom, Model model) {
 
@@ -61,6 +65,7 @@ public class ClassRoomController {
         return "redirect:/classes";
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('EDIT_CLASS')")
     @GetMapping("/edit/{id}")
     public String editClass(@PathVariable Long id, Model model) {
 
@@ -72,6 +77,7 @@ public class ClassRoomController {
         return "class/class-edit";
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('UPDATE_CLASS')")
     @PostMapping("/edit/{id}")
     public String updateClass(@PathVariable Long id, @ModelAttribute @Valid ClassRoom classRoom, BindingResult result) {
 
@@ -84,6 +90,7 @@ public class ClassRoomController {
         return "redirect:/classes";
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('DELETE_CLASS')")
     @GetMapping("/delete/{id}")
     public String deleteClass(@PathVariable Long id) {
 

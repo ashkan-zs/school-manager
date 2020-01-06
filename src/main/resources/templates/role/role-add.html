@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<body>
+<div>
+    <form action="#" th:object="${role}">
+        <label for="name" th:text="#{role.name}">name</label>
+        <input class="form-control" type="text" th:field="*{name}" id="name" required>
+
+        <label for="name" th:text="#{role.name}">name</label>
+        <input class="form-control" type="text" th:field="*{users}" id="name" required>
+    </form>
+</div>
+</body>
+</html>

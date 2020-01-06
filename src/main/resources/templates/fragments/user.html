@@ -2,25 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="menu">
-    <h3>Entities</h3>
-    <ul class="list-unstyled" id="entities">
-        <li>
-            <a href="/students" name="students" th:text="#{students}">Students</a>
-        </li>
-        <li>
-            <a href="/years" name="years" th:text="#{years}">Academic Year</a>
-        </li>
-        <li>
-            <a href="/absences" name="absences" th:text="#{attendance}">Student Attendances</a>
-        </li>
-        <li>
-            <a href="/studentLeaves" name="studentLeaves" th:text="#{studentsLeaves}">leaves</a>
-        </li>
-        <li>
-            <a href="/transcripts" name="transcripts" th:text="#{transcripts}">transcripts</a>
-        </li>
-    </ul>
-</div>
+<ul class="list-unstyled" id="entities" th:fragment="menu">
+    <li>
+        <a href="/students" name="students" th:text="#{students}">Students</a>
+    </li>
+    <li>
+        <a href="/years" name="years" th:text="#{years}">Academic Year</a>
+    </li>
+    <li>
+        <a href="/absences" name="absences" th:text="#{attendance}">Student Attendances</a>
+    </li>
+    <li>
+        <a href="/studentLeaves" name="studentLeaves" th:text="#{studentsLeaves}">leaves</a>
+    </li>
+    <li>
+        <a href="/transcripts" name="transcripts" th:text="#{transcripts}">transcripts</a>
+    </li>
+</ul>
 </body>
 </html>

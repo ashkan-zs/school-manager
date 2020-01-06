@@ -3,6 +3,7 @@ package com.sanatkar.schoolerp.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -47,11 +48,7 @@ public class User implements Serializable {
     @Column(nullable = false)
     private boolean locked = false; // lock
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
-    private List<Role> roles = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<UserRole> userRoles;
 
 }

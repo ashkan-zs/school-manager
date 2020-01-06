@@ -2,6 +2,7 @@ package com.sanatkar.schoolerp.model.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
@@ -28,15 +29,10 @@ public class Role implements Serializable {
 //    @Enumerated(EnumType.STRING)
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private List<User> users;
+    @OneToMany(mappedBy = "role")
+    private List<UserRole> userRoles;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "roles_privileges",
-            joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id")
-    )
-    private List<Privilege> privileges;
+    @OneToMany(mappedBy = "role")
+    private List<RolePrivilege> rolePrivileges;
 
 }
