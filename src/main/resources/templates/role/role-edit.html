@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
 <body>
 
+<div class="col-md-6" layout:fragment="content">
+    <form class="needs-validation" novalidate action="#" th:action="@{/roles/edit/{id}(id=${role.id})}"
+          method="post" th:object="${role}">
+        <div th:replace="role/role-add :: form"></div>
+    </form>
+</div>
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.data.repository.cdi.Eager;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,10 +30,17 @@ public class Role implements Serializable {
 //    @Enumerated(EnumType.STRING)
     private String name;
 
-    @OneToMany(mappedBy = "role")
-    private List<UserRole> userRoles;
+    @ToString.Exclude
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users = new ArrayList<>();
 
-    @OneToMany(mappedBy = "role")
-    private List<RolePrivilege> rolePrivileges;
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "roles_privileges",
+            joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id")
+    )
+    private List<Privilege> privileges = new ArrayList<>();
 
 }

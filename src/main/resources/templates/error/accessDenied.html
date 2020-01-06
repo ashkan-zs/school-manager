@@ -2,9 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/default}">
 <body>
-
+<div class="container" layout:fragment="content">
+    <h1>Access Denied</h1>
+    <p>Sorry <span th:text="${#authentication.getName()}"></span> you can't access this page!</p>
+</div>
 </body>
 </html>

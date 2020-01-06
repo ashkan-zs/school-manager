@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/default}">
 <body>
 
 <div class="container" layout:fragment="content">
-    <a th:href="@{/schools/add}" class="btn btn-labeled btn-success">
+    <a sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','ADD_SCHOOL')" th:href="@{/schools/add}" class="btn btn-labeled btn-success">
         <span class="btn-label">
             <i class="fas fa-plus fa-align-right"></i>
         </span>
@@ -25,8 +26,8 @@
                 <td th:text="#{school.phone}">Phone</td>
                 <td th:text="#{school.email}">Email</td>
                 <td th:text="#{school.isGovernmentSchool}">Government School?</td>
-                <td th:text="#{update}">Update</td>
-                <td th:text="#{delete}">Delete</td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_SCHOOL')" th:text="#{update}">Update</td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_SCHOOL')" th:text="#{delete}">Delete</td>
                 <td th:text="#{detail}"></td>
             </tr>
             </thead>
@@ -39,8 +40,8 @@
                 <td th:text="${school.phone}"></td>
                 <td th:text="${school.email}"></td>
                 <td th:text="${school.isGovernmentSchool} ? #{yes} : #{no}"></td>
-                <td><a th:href="@{/schools/edit/{id}(id=${school.id})}"><i class="fas fa-edit"></i></a></td>
-                <td><a th:href="@{/schools/delete/{id}(id=${school.id})}"><i class="fas fa-trash-alt"></i></a></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_SCHOOL')"><a th:href="@{/schools/edit/{id}(id=${school.id})}"><i class="fas fa-edit"></i></a></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_SCHOOL')"><a th:href="@{/schools/delete/{id}(id=${school.id})}"><i class="fas fa-trash-alt"></i></a></td>
                 <td><a th:href="@{/schools/{id}(id=${school.id})}"><i class="fas fa-info-circle"></i></a></td>
             </tr>
             </tbody>

@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/default}">
 <body>
 
 <div class="container" layout:fragment="content">
-    <a th:href="@{/studentLeaves/add}" class="btn btn-labeled btn-success">
+    <a sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','ADD_LEAVE')" th:href="@{/studentLeaves/add}" class="btn btn-labeled btn-success">
         <span class="btn-label">
             <i class="fas fa-plus fa-align-right"></i>
         </span>
@@ -23,8 +24,8 @@
                 <td th:text="#{studentLeave.requestDate}"></td>
                 <td th:text="#{studentLeave.reason}"></td>
                 <td th:text="#{studentLeave.status}"></td>
-                <td th:text="#{update}"></td>
-                <td th:text="#{delete}"></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_LEAVE')" th:text="#{update}"></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_LEAVE')" th:text="#{delete}"></td>
                 <td th:text="#{detail}"></td>
             </tr>
             </thead>
@@ -36,9 +37,9 @@
                 <td th:text="${leave.requestDate}"></td>
                 <td th:text="${leave.reason}"></td>
                 <td th:text="#{${'leavelStatus.' + leave.status}}"></td>
-                <td><a href="#" th:href="@{/studentLeaves/edit/{id}(id=${leave.id})}"><i class="fas fa-edit"></i></a>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_LEAVE')"><a href="#" th:href="@{/studentLeaves/edit/{id}(id=${leave.id})}"><i class="fas fa-edit"></i></a>
                 </td>
-                <td><a href="#" th:href="@{/studentLeaves/delete/{id}(id=${leave.id})}"><i class="fas fa-trash-alt"></i></a>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_LEAVE')"><a href="#" th:href="@{/studentLeaves/delete/{id}(id=${leave.id})}"><i class="fas fa-trash-alt"></i></a>
                 </td>
                 <td><a href="#" th:href="@{/studentLeaves/{id}(id=${leave.id})}"><i class="fas fa-info-circle"></i></a>
                 </td>

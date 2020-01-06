@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/default}">
 <body>
 
 <div class="container" layout:fragment="content">
-    <a th:href="@{/studentGuardians/add}" class="btn btn-labeled btn-success">
+    <a sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','ADD_STUDENT_GUARDIAN')" th:href="@{/studentGuardians/add}" class="btn btn-labeled btn-success">
         <span class="btn-label">
             <i class="fas fa-plus fa-align-right"></i>
         </span>
@@ -20,8 +21,8 @@
                 <td th:text="#{studentGuardian.student}"></td>
                 <td th:text="#{studentGuardian.guardian}"></td>
                 <td th:text="#{studentGuardian.relation}"></td>
-                <td th:text="#{update}"></td>
-                <td th:text="#{delete}"></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_STUDENT_GUARDIAN')" th:text="#{update}"></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_STUDENT_GUARDIAN')" th:text="#{delete}"></td>
                 <td th:text="#{detail}"></td>
             </tr>
             </thead>
@@ -30,9 +31,9 @@
                 <td th:text="${studentGuardian.student.firstName}"></td>
                 <td th:text="${studentGuardian.guardian.firstName}"></td>
                 <td th:text="${studentGuardian.relation}"></td>
-                <td><a href="#" th:href="@{/studentGuardians/edit/{id}(id=${studentGuardian.id})}"><i
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_STUDENT_GUARDIAN')"><a href="#" th:href="@{/studentGuardians/edit/{id}(id=${studentGuardian.id})}"><i
                         class="fas fa-edit"></i></a></td>
-                <td><a href="#" th:href="@{/studentGuardians/delete/{id}(id=${studentGuardian.id})}"><i
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_STUDENT_GUARDIAN')"><a href="#" th:href="@{/studentGuardians/delete/{id}(id=${studentGuardian.id})}"><i
                         class="fas fa-trash-alt"></i></a></td>
                 <td><a href="#" th:href="@{/studentGuardians/{id}(id=${studentGuardian.id})}"><i
                         class="fas fa-info-circle"></i></a></td>

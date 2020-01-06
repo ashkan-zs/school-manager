@@ -69,6 +69,7 @@ public class RoleController {
         Role role = roleDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid id:" + id));
 
         model.addAttribute("role", role);
+        model.addAttribute("privileges", privilegeDao.findAll());
 
         return "role/role-edit";
     }

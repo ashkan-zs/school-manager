@@ -27,8 +27,8 @@ public class MainController {
         return "login/login";
     }
 
-    @GetMapping("/user")
-    public String userIndex() {
-        return "user/home";
+    @GetMapping("/accessDenied")
+    public String accessDenied() {
+        return "error/accessDenied";
     }
 }

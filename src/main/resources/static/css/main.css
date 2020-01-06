@@ -131,3 +131,8 @@ a, a:hover, a:focus {
 #register-container {
     margin: 15px auto;
 }
+
+.multi-search-input {
+    border-radius: 10px;
+    margin-bottom: 5px;
+}

@@ -2,11 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/default}">
 <body>
 <!--TODO: create edit and detail page for users-->
 <div class="container" layout:fragment="content">
-    <a th:href="@{/users/add}" class="btn btn-labeled btn-success">
+    <a sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','ADD_USER')" th:href="@{/users/add}"
+       class="btn btn-labeled btn-success">
         <span class="btn-label">
             <i class="fas fa-plus fa-align-right"></i>
         </span>
@@ -22,20 +24,28 @@
                 <td th:text="#{user.role}">Role</td>
                 <td th:text="#{user.active}">is Active</td>
                 <td th:text="#{user.lock}">is Lock</td>
-                <td></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_USER')" th:text="#{update}"></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_USER')" th:text="#{delete}"></td>
+                <td th:text="#{detail}"></td>
             </tr>
             </thead>
             <tbody>
             <tr th:each="user : ${users}">
                 <td th:text="${user.username}">Username</td>
                 <td th:text="${user.createDate}">Create Date</td>
-                <td th:each="auth : ${user.roles}">
-                    <span th:text="#{${auth.name}}"></span>
+                <td>
+                    <span th:each="auth : ${user.roles}">
+                        <th:block th:text="#{${auth.name}}"></th:block>
+                    </span>
                 </td>
                 <td th:text="${user.active}">is Active</td>
                 <td th:text="${user.locked}">is Lock</td>
-                <td><a th:href="@{/users/edit/{id}(id=${user.id})}"><i class="fas fa-edit"></i></a></td>
-                <td><a th:href="@{/users/delete/{id}(id=${user.id})}"><i class="fas fa-trash-alt"></i></a></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_USER')">
+                    <a th:href="@{/users/edit/{id}(id=${user.id})}"><i class="fas fa-edit"></i></a>
+                </td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_USER')">
+                    <a th:href="@{/users/delete/{id}(id=${user.id})}"><i class="fas fa-trash-alt"></i></a>
+                </td>
                 <td><a th:href="@{/users/{id}(id=${user.id})}"><i class="fas fa-info-circle"></i></a></td>
             </tr>
             </tbody>

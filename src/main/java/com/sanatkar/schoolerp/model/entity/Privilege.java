@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
 @Entity
 public class Privilege implements Serializable {
 
-    private static final long serialVersionUID = 4222243258741914334L;
+    private static final long serialVersionUID = 2511928163502258195L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +24,6 @@ public class Privilege implements Serializable {
 
     private String name;
 
-    @OneToMany(mappedBy = "privilege")
-    private List<RolePrivilege> rolePrivileges;
+    @ManyToMany(mappedBy = "privileges")
+    private List<Role> roles = new ArrayList<>();
 }

@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorator="layouts/default">
 <body>
 
 <div class="container" layout:fragment="content">
-    <a th:href="@{/years/add}" class="btn btn-labeled btn-success">
+    <a sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','ADD_YEAR')" th:href="@{/years/add}" class="btn btn-labeled btn-success">
         <span class="btn-label">
             <i class="fas fa-plus fa-align-right"></i>
         </span>
@@ -21,8 +22,8 @@
                 <td th:text="#{year.fromYear}">from year</td>
                 <td th:text="#{year.toYear}">to year</td>
                 <td th:text="#{year.school}">school</td>
-                <td th:text="#{update}">update</td>
-                <td th:text="#{delete}">delete</td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_YEAR')" th:text="#{update}">update</td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_YEAR')" th:text="#{delete}">delete</td>
                 <td th:text="#{detail}">detail</td>
             </tr>
             </thead>
@@ -32,8 +33,8 @@
                 <td th:text="${year.fromYear}">from year</td>
                 <td th:text="${year.toYear}">to year</td>
                 <td th:text="${year.school.name}">school</td>
-                <td><a th:href="@{/years/edit/{id}(id=${year.id})}"><i class="fas fa-edit"></i></a></td>
-                <td><a th:href="@{/years/delete/{id}(id=${year.id})}"><i class="fas fa-trash-alt"></i></a></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_YEAR')"><a th:href="@{/years/edit/{id}(id=${year.id})}"><i class="fas fa-edit"></i></a></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_YEAR')"><a th:href="@{/years/delete/{id}(id=${year.id})}"><i class="fas fa-trash-alt"></i></a></td>
                 <td><a th:href="@{/years/{id}(id=${year.id})}"><i class="fas fa-info-circle"></i></a></td>
             </tr>
             </tbody>

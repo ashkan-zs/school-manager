@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/default}">
 <body>
 
 <div class="container" layout:fragment="content">
-    <a th:href="@{/guardians/add}" class="btn btn-labeled btn-success">
+    <a sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','ADD_GUARDIAN')" th:href="@{/guardians/add}" class="btn btn-labeled btn-success">
         <span class="btn-label">
             <i class="fas fa-plus fa-align-right"></i>
         </span>
@@ -26,8 +27,8 @@
                 <td th:text="#{guardian.phone}"></td>
                 <td th:text="#{guardian.address}"></td>
                 <td th:text="#{guardian.user}"></td>
-                <td th:text="#{update}"></td>
-                <td th:text="#{delete}"></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_GUARDIAN')" th:text="#{update}"></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_GUARDIAN')" th:text="#{delete}"></td>
                 <td th:text="#{detail}"></td>
             </tr>
             </thead>
@@ -42,9 +43,9 @@
                 <td th:text="${guardian.phone}"></td>
                 <td th:text="${guardian.address}"></td>
                 <td th:text="${guardian.user.username}"></td>
-                <td><a href="#" th:href="@{/guardians/edit/{id}(id=${guardian.id})}"><i class="fas fa-edit"></i></a>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_GUARDIAN')"><a href="#" th:href="@{/guardians/edit/{id}(id=${guardian.id})}"><i class="fas fa-edit"></i></a>
                 </td>
-                <td><a href="#" th:href="@{/guardians/delete/{id}(id=${guardian.id})}"><i class="fas fa-trash-alt"></i></a>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_GUARDIAN')"><a href="#" th:href="@{/guardians/delete/{id}(id=${guardian.id})}"><i class="fas fa-trash-alt"></i></a>
                 </td>
                 <td><a href="#" th:href="@{/guardians/{id}(id=${guardian.id})}"><i class="fas fa-info-circle"></i></a>
                 </td>

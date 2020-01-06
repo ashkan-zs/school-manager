@@ -2,11 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/default}">
 <body>
 
 <div class="container" layout:fragment="content">
-    <a th:href="@{/transcripts/add}" class="btn btn-labeled btn-success">
+    <a sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','ADD_TRANSCRIPT')" th:href="@{/transcripts/add}"
+       class="btn btn-labeled btn-success">
         <span class="btn-label">
             <i class="fas fa-plus fa-align-right"></i>
         </span>
@@ -24,8 +26,8 @@
                 <td th:text="#{transcript.description}"></td>
                 <td th:text="#{transcript.type}"></td>
                 <td th:text="#{transcript.year}"></td>
-                <td th:text="#{update}"></td>
-                <td th:text="#{delete}"></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_TRANSCRIPT')" th:text="#{update}"></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_TRANSCRIPT')" th:text="#{delete}"></td>
                 <td th:text="#{detail}"></td>
             </tr>
             </thead>
@@ -38,10 +40,12 @@
                 <td th:text="${transcript.description}"></td>
                 <td th:text="${transcript.type}"></td>
                 <td th:text="${transcript.year.name}"></td>
-                <td><a href="#" th:href="@{/transcripts/edit/{id}(id=${transcript.id})}"><i class="fas fa-edit"></i></a>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_TRANSCRIPT')" >
+                    <a href="#" th:href="@{/transcripts/edit/{id}(id=${transcript.id})}"><i class="fas fa-edit"></i></a>
                 </td>
-                <td><a href="#" th:href="@{/transcripts/delete/{id}(id=${transcript.id})}"><i
-                        class="fas fa-trash-alt"></i></a>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_TRANSCRIPT')" >
+                    <a href="#" th:href="@{/transcripts/delete/{id}(id=${transcript.id})}"><i
+                            class="fas fa-trash-alt"></i></a>
                 </td>
                 <td><a href="#" th:href="@{/transcripts/{id}(id=${transcript.id})}"><i
                         class="fas fa-info-circle"></i></a>

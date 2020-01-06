@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/default}">
 <body>
 
 <div class="container" layout:fragment="content">
-    <a th:href="@{/courses/add}" class="btn btn-labeled btn-success">
+    <a sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','ADD_COURSE')" th:href="@{/courses/add}" class="btn btn-labeled btn-success">
         <span class="btn-label">
             <i class="fas fa-plus fa-align-right"></i>
         </span>
@@ -19,8 +20,8 @@
             <tr>
                 <td th:text="#{course.name}">name</td>
                 <td th:text="#{course.type}">type</td>
-                <td th:text="#{update}">update</td>
-                <td th:text="#{delete}">delete</td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_COURSE')" th:text="#{update}">update</td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_COURSE')" th:text="#{delete}">delete</td>
                 <td th:text="#{detail}">detail</td>
             </tr>
             </thead>
@@ -28,8 +29,8 @@
             <tr th:each="course : ${courses}">
                 <td th:text="${course.courseName}"></td>
                 <td th:text="${course.courseType}"></td>
-                <td><a href="#" th:href="@{/courses/edit/{id}(id=${course.id})}"><i class="fas fa-edit"></i></a></td>
-                <td><a href="#" th:href="@{/courses/delete/{id}(id=${course.id})}"><i class="fas fa-trash-alt"></i></a>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_COURSE')"><a href="#" th:href="@{/courses/edit/{id}(id=${course.id})}"><i class="fas fa-edit"></i></a></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_COURSE')"><a href="#" th:href="@{/courses/delete/{id}(id=${course.id})}"><i class="fas fa-trash-alt"></i></a>
                 <td><a href="#" th:href="@{/courses/{id}(id=${course.id})}"><i class="fas fa-info-circle"></i></a>
             </tr>
             </tbody>

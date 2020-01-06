@@ -16,8 +16,8 @@
                     <div>نام کاربری: <span th:text="${#authentication.name}"></span></div>
                     <a href="#" th:href="@{/logout}" class="btn btn-danger btn-sm">خروج</a>
                 </div>
-                <div sec:authorize="hasRole('ADMIN')" th:replace="~{fragments/admin :: menu}"></div>
-                <div sec:authorize="hasRole('USER')" th:replace="~{fragments/user :: menu}"></div>
+                <div th:replace="~{fragments/admin :: menu}"></div>
+<!--                <div sec:authorize="hasRole('USER')" th:replace="~{fragments/user :: menu}"></div>-->
             </div>
         </nav>
         <!--Content of page will replace here-->

@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/default}">
 <body>
+
+<div class="container" layout:fragment="content">
+    <a sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','ADD_ROLE')" th:href="@{/roles/add}" class="btn btn-labeled btn-success">
+        <span class="btn-label">
+            <i class="fas fa-plus fa-align-right"></i>
+        </span>
+        <span th:text="#{role.add}"></span>
+    </a>
+    <h2 th:if="${roles.isEmpty()}" th:text="#{role.empty}"></h2>
+    <div th:unless="${roles.isEmpty()}" class="table-responsive">
+        <table th:unless="${roles.isEmpty()}" class="table table-striped">
+            <thead class="thead-light">
+            <tr>
+                <td th:text="#{role.name}">role name</td>
+                <td th:text="#{role.privileges}">privileges</td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_ROLW')" th:text="#{update}">Update</td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_ROLW')" th:text="#{delete}">Delete</td>
+                <td th:text="#{detail}"></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="role : ${roles}">
+                <td th:text="${role.name}">role name</td>
+                <td>
+                    <div class="">
+                    <span class="badge badge-secondary m-1" th:each="privilege : ${role.privileges}">
+                        <th:block th:text="#{${privilege.name}}"></th:block>
+                    </span>
+                    </div>
+                </td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_ROLE')"><a th:href="@{/roles/edit/{id}(id=${role.id})}"><i class="fas fa-edit"></i></a></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_ROLE')"><a th:href="@{/roles/delete/{id}(id=${role.id})}"><i class="fas fa-trash-alt"></i></a></td>
+                <td><a th:href="@{/roles/{id}(id=${role.id})}"><i class="fas fa-info-circle"></i></a></td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
 
 </body>
 </html>

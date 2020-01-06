@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/default}">
 <body>
 
 <div class="container" layout:fragment="content">
-    <a th:href="@{/absences/add}" class="btn btn-labeled btn-success">
+    <a sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','ADD_ROLLCALL')" th:href="@{/absences/add}" class="btn btn-labeled btn-success">
         <span class="btn-label">
             <i class="fas fa-plus fa-align-right"></i>
         </span>
@@ -22,8 +23,8 @@
                 <td th:text="#{attendance.reason}">Reason</td>
                 <td th:text="#{attendance.isAcceptable}">isAcceptable</td>
                 <td th:text="#{attendance.year}">Year</td>
-                <td th:text="#{update}">Update</td>
-                <td th:text="#{delete}">Delete</td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_ROLLCALL')" th:text="#{update}">Update</td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_ROLLCALL')" th:text="#{delete}">Delete</td>
                 <td th:text="#{detail}"></td>
             </tr>
             </thead>
@@ -34,8 +35,8 @@
                 <td th:text="${absence.reason}">Reason</td>
                 <td th:text="${absence.isAcceptable}">isAcceptable</td>
                 <td th:text="${absence.year}">Year</td>
-                <td><a th:href="@{/absences/edit/{id}(id=${absence.id})}"><i class="fas fa-edit"></i></a></td>
-                <td><a th:href="@{/absences/delete/{id}(id=${absence.id})}"><i class="fas fa-trash-alt"></i></a></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_ROLLCALL')"><a th:href="@{/absences/edit/{id}(id=${absence.id})}"><i class="fas fa-edit"></i></a></td>
+                <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_ROLLCALL')"><a th:href="@{/absences/delete/{id}(id=${absence.id})}"><i class="fas fa-trash-alt"></i></a></td>
                 <td><a th:href="@{/absences/{id}(id=${absence.id})}"><i class="fas fa-info-circle"></i></a></td>
             </tr>
             </tbody>

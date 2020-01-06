@@ -4,14 +4,29 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/default}">
 <body>
-<div>
-    <form action="#" th:object="${role}">
-        <label for="name" th:text="#{role.name}">name</label>
-        <input class="form-control" type="text" th:field="*{name}" id="name" required>
+<div class="container" layout:fragment="content">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <form class="needs-validation" novalidate action="#" th:object="${role}" th:action="@{/roles}"
+                  method="post">
+                <div layout:fragment="form">
+                    <label for="name" th:text="#{role.name}">name</label>
+                    <input class="form-control" type="text" th:field="*{name}" id="name" required>
 
-        <label for="name" th:text="#{role.name}">name</label>
-        <input class="form-control" type="text" th:field="*{users}" id="name" required>
-    </form>
+                    <div class="form-group">
+                        <label for="privilegesInRole" th:text="#{role.privileges}">Privileges</label>
+                        <select class="form-control" th:field="*{privileges}" id="privilegesInRole" multiple>
+                            <option th:each="privilege : ${privileges}"
+                                    th:value="${privilege.id}"
+                                    th:text="#{${privilege.name}}"></option>
+                        </select>
+                    </div>
+                    <input class="btn btn-success" type="Submit" th:value="#{submit}" value="submit">
+                    <a class="btn btn-danger" th:href="@{/roles}" th:text="#{cancel}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>

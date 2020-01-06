@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,5 +30,5 @@ public class Course implements Serializable {
     private String courseType;
 
     @OneToMany(mappedBy = "course")
-    private List<CourseLevel> courseLevels;
+    private List<CourseLevel> courseLevels = new ArrayList<>();
 }

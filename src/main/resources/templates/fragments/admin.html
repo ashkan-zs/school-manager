@@ -1,51 +1,55 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <ul class="list-unstyled" id="entities" th:fragment="menu">
-    <li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_USER')">
         <a href="/users" name="users" th:text="#{users}">Users</a>
     </li>
-    <li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_ROLE')">
+        <a href="/roles" name="users" th:text="#{roles}">Roles</a>
+    </li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_SCHOOL')">
         <a href="/schools" name="schools" th:text="#{schools}">Schools</a>
     </li>
-    <li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_STUDENT')">
         <a href="/students" name="students" th:text="#{students}">Students</a>
     </li>
-    <li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_EMPLOYEE')">
         <a href="/employees" name="employees" th:text="#{employees}">employees</a>
     </li>
-    <li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_YEAR')">
         <a href="/years" name="years" th:text="#{years}">Academic Year</a>
     </li>
-    <li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_CLASS')">
         <a href="/classes" name="classes" th:text="#{classes}">Classes</a>
     </li>
-    <li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_COURSE')">
         <a href="/courses" name="courses" th:text="#{courses}">Courses</a>
     </li>
-    <li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_TEACHER')">
         <a href="/teachers" name="teachers" th:text="#{classTeachers}">teachers</a>
     </li>
-    <li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_LEVEL')">
         <a href="/levels" name="levels" th:text="#{levels}">levels</a>
     </li>
-    <li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_JOB')">
         <a href="/jobs" name="jobs" th:text="#{jobs}">jobs</a>
     </li>
-    <li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_GUARDIAN')">
         <a href="/guardians" name="guardians" th:text="#{guardians}">Guardians</a>
     </li>
-    <li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_ROLLCALL')">
         <a href="/absences" name="absences" th:text="#{attendance}">Student Attendances</a>
     </li>
-    <li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_LEAVE')">
         <a href="/studentLeaves" name="studentLeaves" th:text="#{studentsLeaves}">leaves</a>
     </li>
-    <li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_STUDENT_GUARDIAN')">
         <a href="/studentGuardians" name="studentGuardians" th:text="#{studentGuardians}">Student Guardians</a>
     </li>
-    <li>
+    <li sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','SHOW_TRANSCRIPT')">
         <a href="/transcripts" name="transcripts" th:text="#{transcripts}">transcripts</a>
     </li>
 </ul>
