@@ -21,9 +21,5 @@ public class JobTitle implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title")
     private String title;
-
-    @Column(name = "role")
-    private String role;
 }

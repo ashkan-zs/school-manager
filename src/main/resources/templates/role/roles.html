@@ -31,7 +31,7 @@
                 <td>
                     <div class="">
                     <span class="badge badge-secondary m-1" th:each="privilege : ${role.privileges}">
-                        <th:block th:text="#{${privilege.name}}"></th:block>
+                        <th:block th:text="#{${#strings.arraySplit(privilege.name, ',')[0]}}"></th:block>
                     </span>
                     </div>
                 </td>

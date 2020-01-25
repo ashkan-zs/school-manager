@@ -18,15 +18,6 @@
                 <input type="text" th:field="*{base}" id="base" class="form-control" required>
             </div>
 
-            <div class="form-group">
-                <label for="markType">mark type</label>
-                <select class="form-control" id="markType" th:field="*{markType}">
-                    <option th:each="markType : ${T(com.sanatkar.schoolerp.model.entity.enumeration.MarkType).values()}"
-                            th:value="${markType}"
-                            th:text="#{${'markType.' + markType}}"></option>
-                </select>
-            </div>
-
             <button type="submit" class="btn btn-success" th:text="#{submit}">submit</button>
             <a class="btn btn-danger" href="#" th:href="@{/levels}" th:text="#{cancel}">cancel</a>
         </div>

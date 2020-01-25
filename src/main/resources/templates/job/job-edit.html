@@ -11,10 +11,6 @@
             <label for="title"></label>
             <input type="text" id="title" class="form-control" th:field="*{title}" required>
         </div>
-        <div class="form-group">
-            <label for="role"></label>
-            <input type="text" id="role" class="form-control" th:field="*{role}" required>
-        </div>
 
         <button type="submit" class="btn btn-success" th:text="#{submit}">submit</button>
         <a href="#" th:href="@{/jobs}" class="btn btn-danger" th:text="#{cancel}">cancel</a>

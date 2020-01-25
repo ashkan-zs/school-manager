@@ -9,25 +9,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Create by ashkan on 2019/06/13
  */
 @Controller
+@RequestMapping("/")
 public class MainController {
 
-    @RequestMapping("/")
+    @GetMapping
     public String home() {
         return "home";
     }
 
-    @GetMapping("/login")
+    @GetMapping("login")
     public String login(Model model) {
         return "login/login";
     }
 
-    @RequestMapping("/login-error")
+    @GetMapping("login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
         return "login/login";
     }
 
-    @GetMapping("/accessDenied")
+    @GetMapping("accessDenied")
     public String accessDenied() {
         return "error/accessDenied";
     }

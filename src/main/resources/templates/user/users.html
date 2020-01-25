@@ -38,8 +38,8 @@
                         <th:block th:text="#{${auth.name}}"></th:block>
                     </span>
                 </td>
-                <td th:text="${user.active}">is Active</td>
-                <td th:text="${user.locked}">is Lock</td>
+                <td><i th:class="${user.active} ? 'fas fa-check' : 'fa fa-times'"></i></td>
+                <td><i th:class="${user.locked} ? 'fas fa-check' : 'fa fa-times'"></td>
                 <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_USER')">
                     <a th:href="@{/users/edit/{id}(id=${user.id})}"><i class="fas fa-edit"></i></a>
                 </td>

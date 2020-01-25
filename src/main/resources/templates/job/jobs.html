@@ -19,7 +19,6 @@
             <thead>
             <tr>
                 <td th:text="#{job.title}"></td>
-                <td th:text="#{job.role}"></td>
                 <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_JOB')" th:text="#{update}"></td>
                 <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_JOB')" th:text="#{delete}"></td>
                 <td th:text="#{detail}"></td>
@@ -28,7 +27,6 @@
             <tbody>
             <tr th:each="job : ${jobs}">
                 <td th:text="${job.title}"></td>
-                <td th:text="${job.role}"></td>
                 <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_JOB')"><a href="#" th:href="@{/jobs/edit/{id}(id=${job.id})}"><i class="fas fa-edit"></i></a></td>
                 <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_JOB')"><a href="#" th:href="@{/jobs/delete/{id}(id=${job.id})}"><i class="fas fa-trash-alt"></i></a></td>
                 <td><a href="#" th:href="@{/jobs/{id}(id=${job.id})}"><i class="fas fa-info-circle"></i></a></td>

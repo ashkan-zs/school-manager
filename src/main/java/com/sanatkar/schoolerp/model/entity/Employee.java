@@ -68,7 +68,7 @@ public class Employee implements Serializable {
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("employees")
-    private JobTitle title;
+    private JobTitle title; //TODO: change this to role?!
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)

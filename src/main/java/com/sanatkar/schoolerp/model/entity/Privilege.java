@@ -24,6 +24,8 @@ public class Privilege implements Serializable {
 
     private String name;
 
-    @ManyToMany(mappedBy = "privileges")
+    private String url;
+
+    @ManyToMany(mappedBy = "privileges", fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
 }

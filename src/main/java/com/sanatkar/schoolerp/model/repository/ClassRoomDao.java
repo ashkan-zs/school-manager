@@ -1,6 +1,7 @@
 package com.sanatkar.schoolerp.model.repository;
 
 import com.sanatkar.schoolerp.model.entity.ClassRoom;
+import com.sanatkar.schoolerp.model.entity.ClassTeacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

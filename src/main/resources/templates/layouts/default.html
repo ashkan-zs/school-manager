@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="~{fragments/header :: common_head(~{::title})}">
     <title></title>
@@ -17,7 +16,7 @@
                     <a href="#" th:href="@{/logout}" class="btn btn-danger btn-sm">خروج</a>
                 </div>
                 <div th:replace="~{fragments/admin :: menu}"></div>
-<!--                <div sec:authorize="hasRole('USER')" th:replace="~{fragments/user :: menu}"></div>-->
+                <!--                <div sec:authorize="hasRole('USER')" th:replace="~{fragments/user :: menu}"></div>-->
             </div>
         </nav>
         <!--Content of page will replace here-->

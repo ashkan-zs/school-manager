@@ -1,8 +1,10 @@
 package com.sanatkar.schoolerp.controller;
 
+import com.sanatkar.schoolerp.model.entity.Employee;
 import com.sanatkar.schoolerp.model.entity.Privilege;
 import com.sanatkar.schoolerp.model.entity.Role;
 import com.sanatkar.schoolerp.model.entity.User;
+import com.sanatkar.schoolerp.model.repository.EmployeeDao;
 import com.sanatkar.schoolerp.model.repository.PrivilegeDao;
 import com.sanatkar.schoolerp.model.repository.RoleDao;
 import com.sanatkar.schoolerp.model.repository.UserDao;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Component;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,17 +28,19 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
     boolean alreadySetup = false;
 
-    @Autowired
-    private UserDao userDao;
-
-    @Autowired
-    private RoleDao roleDao;
-
-    @Autowired
-    private PrivilegeDao privilegeDao;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
+    private UserDao userDao;
+    private RoleDao roleDao;
+    private PrivilegeDao privilegeDao;
+    private EmployeeDao employeeDao;
+
+    public InitialDataLoader(PasswordEncoder passwordEncoder, UserDao userDao, RoleDao roleDao, PrivilegeDao privilegeDao, EmployeeDao employeeDao) {
+        this.passwordEncoder = passwordEncoder;
+        this.userDao = userDao;
+        this.roleDao = roleDao;
+        this.privilegeDao = privilegeDao;
+        this.employeeDao = employeeDao;
+    }
 
     @Override
     @Transactional
@@ -45,38 +50,55 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
             return;
         }
 
-        Privilege readPrivilege = createPrivilegeIfNotFound("READ_PRIVILEGE");
+        Privilege userPrivilege = createPrivilegeIfNotFound("SHOW_STUDENT,ALL_PRIVILEGE");
+        Privilege homePrivilege = createPrivilegeIfNotFound("HOME,ALL_PRIVILEGE");
         Privilege allPrivilege = createPrivilegeIfNotFound("ALL_PRIVILEGE");
 
         List<Privilege> adminPrivilege = Arrays.asList(allPrivilege);
 
-        createRoleIfNotFound("ROLE_ADMIN", adminPrivilege);
-        createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege));
+        Role roleAdmin = createRoleIfNotFound("ROLE_ADMIN", adminPrivilege);
+        Role roleUser = createRoleIfNotFound("ROLE_USER", Arrays.asList(homePrivilege));
+        Role roleTeacher = createRoleIfNotFound("ROLE_TEACHER", Arrays.asList(userPrivilege, homePrivilege));
 
-        User admin = userDao.findByUsername("admin");
-        if (admin == null) {
-            Role adminRole = roleDao.findByName("ROLE_ADMIN");
-            User user = new User();
-            user.setUsername("admin");
-            user.setPassword(passwordEncoder.encode("admin"));
+        createUserIfNotFound("admin", "admin", roleAdmin);
+        createUserIfNotFound("user", "user", roleUser);
+        User fateme = createUserIfNotFound("fateme", "fateme", roleTeacher);
+        User ashkan = createUserIfNotFound("ashkan", "ashkan", roleTeacher);
+
+//        createEmployeeIfNotFound(fateme, "fateme", "sohrabi");
+//        createEmployeeIfNotFound(ashkan, "ashkan", "zarifian");
+
+        alreadySetup = true;
+    }
+
+    @Transactional
+    Employee createEmployeeIfNotFound(User user, String firstName, String lastName) {
+        Employee employee = employeeDao.findByUser(user);
+
+        if (employee == null) {
+            employee = new Employee();
+            employee.setUser(user);
+            employee.setFirstName(firstName);
+            employee.setLastName(lastName);
+            employeeDao.save(employee);
+        }
+
+        return employee;
+    }
+    @Transactional
+    User createUserIfNotFound(String username, String password, Role role) {
+        User user = userDao.findByUsername(username);
+
+        if (user == null) {
+            user = new User();
+            user.setUsername(username);
+            user.setPassword(passwordEncoder.encode(password));
             user.setCreateDate(LocalDateTime.now());
             user.setActive(true);
-            user.setRoles(Arrays.asList(adminRole));
+            user.setRoles(Collections.singletonList(role));
             userDao.save(user);
         }
-
-        User user = userDao.findByUsername("user");
-        if (user == null) {
-            Role userRole = roleDao.findByName("ROLE_USER");
-            User user1 = new User();
-            user1.setUsername("user");
-            user1.setPassword(passwordEncoder.encode("user"));
-            user1.setCreateDate(LocalDateTime.now());
-            user1.setActive(true);
-            user1.setRoles(Arrays.asList(userRole));
-            userDao.save(user1);
-        }
-        alreadySetup = false;
+        return user;
     }
 
     @Transactional

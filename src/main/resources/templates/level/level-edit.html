@@ -7,28 +7,7 @@
 
 <div class="col-md-6" layout:fragment="content">
     <form th:object="${level}" action="#" th:action="@{/levels/edit/{id}(id=${level.id})}" method="post" class="needs-validation">
-
-        <div class="form-group">
-            <label for="name">name</label>
-            <input type="text" th:field="*{name}" id="name" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-            <label for="base">name</label>
-            <input type="text" th:field="*{base}" id="base" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-            <label for="markType">mark type</label>
-            <select class="form-control" id="markType" th:field="*{markType}">
-                <option th:each="markType : ${T(com.sanatkar.schoolerp.model.entity.enumeration.MarkType).values()}"
-                        th:value="${markType}"
-                        th:text="#{${'bloodGroup.' + markType}}"></option>
-            </select>
-        </div>
-
-        <button type="submit" class="btn btn-success" th:text="#{submit}">submit</button>
-        <a class="btn btn-danger" href="#" th:href="@{/levels}" th:text="#{cancel}">cancel</a>
+        <div th:replace="level/level-add :: form"></div>
     </form>
 </div>
 

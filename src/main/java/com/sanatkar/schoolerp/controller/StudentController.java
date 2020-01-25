@@ -3,8 +3,8 @@ package com.sanatkar.schoolerp.controller;
 import com.sanatkar.schoolerp.model.entity.*;
 import com.sanatkar.schoolerp.model.repository.*;
 import lombok.extern.log4j.Log4j2;
-import org.slf4j.Logger;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Create by ashkan on 2019/06/19
@@ -53,15 +54,23 @@ public class StudentController {
 
 
         UserDetailsImp user = (UserDetailsImp) authentication.getPrincipal();
-        log.info("current username is: " + user.getUsername());
-        Employee teacher = employeeDao.findByUser(user.getUser());
-        log.info("teacher name" + user.getUser());
 
         // TODO: check user role if it's admin show all students
-        if (request.isUserInRole("ADMIN")) {
+        if (request.isUserInRole("ADMIN") || authentication.getAuthorities().contains(new SimpleGrantedAuthority("ALL_PRIVILEGE"))) {
             model.addAttribute("students", studentDao.findAll());
         } else {
-            model.addAttribute("students", studentDao.findAll());
+            Employee teacher = employeeDao.findByUser(user.getUser());
+
+            List<Student> students = new ArrayList<>();
+
+            if (teacher != null) {
+                List<ClassTeacher> classTeachers = teacher.getClassTeachers();
+                for (ClassTeacher classTeacher : classTeachers) {
+                    ClassRoom classRoom = classTeacher.getClassRoom();
+                    students.addAll(classRoom.getStudents());
+                }
+            }
+            model.addAttribute("students", students);
         }
 
         return "student/students";

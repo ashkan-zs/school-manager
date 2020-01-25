@@ -19,7 +19,6 @@
             <tr>
                 <td th:text="#{level.name}"></td>
                 <td th:text="#{level.base}"></td>
-                <td th:text="#{level.markType}"></td>
                 <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_LEVEL')" th:text="#{update}"></td>
                 <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_LEVEL')" th:text="#{delete}"></td>
                 <td th:text="#{detail}"></td>
@@ -29,7 +28,6 @@
             <tr th:each="level : ${levels}">
                 <td th:text="${level.name}"></td>
                 <td th:text="${level.base}"></td>
-                <td th:text="#{${'markType.' + level.markType}}"></td>
                 <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','EDIT_LEVEL')"><a href="#" th:href="@{/levels/edit/{id}(id=${level.id})}"><i class="fas fa-edit"></i></a></td>
                 <td sec:authorize="hasAnyAuthority('ALL_PRIVILEGE','DELETE_LEVEL')"><a href="#" th:href="@{/levels/delete/{id}(id=${level.id})}"><i class="fas fa-trash-alt"></i></a>
                 </td>
