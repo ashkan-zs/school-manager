@@ -19,7 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -90,16 +89,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         for (Privilege privilege : privilegeList) {
             if (!privilege.getName().isEmpty() && !privilege.getUrl().isEmpty()) {
                 String[] urls = privilege.getUrl().split(",");
-                String[] authorities = privilege.getName().split(",");
+
+                if (privilege.getName().equals("ALL_PRIVILEGE")) {
+                    log.info("all privilege skipped");
+                    continue;
+                }
                 http.authorizeRequests()
                         .mvcMatchers(urls)
-                        .hasAnyAuthority(authorities);
+                        .hasAnyAuthority(privilege.getName(), "ALL_PRIVILEGE");
             }
         }
 
         // @formatter:off
         http
             .authorizeRequests()
+                .antMatchers("/**").hasAuthority("ALL_PRIVILEGE")
                 .anyRequest()
                 .authenticated()
             .and()

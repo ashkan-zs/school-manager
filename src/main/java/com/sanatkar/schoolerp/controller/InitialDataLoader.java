@@ -50,8 +50,8 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
             return;
         }
 
-        Privilege userPrivilege = createPrivilegeIfNotFound("SHOW_STUDENT,ALL_PRIVILEGE");
-        Privilege homePrivilege = createPrivilegeIfNotFound("HOME,ALL_PRIVILEGE");
+        Privilege userPrivilege = createPrivilegeIfNotFound("SHOW_STUDENT");
+        Privilege homePrivilege = createPrivilegeIfNotFound("HOME");
         Privilege allPrivilege = createPrivilegeIfNotFound("ALL_PRIVILEGE");
 
         List<Privilege> adminPrivilege = Arrays.asList(allPrivilege);
