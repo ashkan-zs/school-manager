@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface SchoolDao extends JpaRepository<School, Long> {
+
+    School findByName(String name);
 }

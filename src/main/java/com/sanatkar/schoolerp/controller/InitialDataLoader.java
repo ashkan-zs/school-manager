@@ -1,14 +1,7 @@
 package com.sanatkar.schoolerp.controller;
 
-import com.sanatkar.schoolerp.model.entity.Employee;
-import com.sanatkar.schoolerp.model.entity.Privilege;
-import com.sanatkar.schoolerp.model.entity.Role;
-import com.sanatkar.schoolerp.model.entity.User;
-import com.sanatkar.schoolerp.model.repository.EmployeeDao;
-import com.sanatkar.schoolerp.model.repository.PrivilegeDao;
-import com.sanatkar.schoolerp.model.repository.RoleDao;
-import com.sanatkar.schoolerp.model.repository.UserDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.sanatkar.schoolerp.model.entity.*;
+import com.sanatkar.schoolerp.model.repository.*;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,13 +26,17 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     private RoleDao roleDao;
     private PrivilegeDao privilegeDao;
     private EmployeeDao employeeDao;
+    private SchoolDao schoolDao;
+    private JobTitleDao jobTitleDao;
 
-    public InitialDataLoader(PasswordEncoder passwordEncoder, UserDao userDao, RoleDao roleDao, PrivilegeDao privilegeDao, EmployeeDao employeeDao) {
+    public InitialDataLoader(PasswordEncoder passwordEncoder, UserDao userDao, RoleDao roleDao, PrivilegeDao privilegeDao, EmployeeDao employeeDao, SchoolDao schoolDao, JobTitleDao jobTitleDao) {
         this.passwordEncoder = passwordEncoder;
         this.userDao = userDao;
         this.roleDao = roleDao;
         this.privilegeDao = privilegeDao;
         this.employeeDao = employeeDao;
+        this.schoolDao = schoolDao;
+        this.jobTitleDao = jobTitleDao;
     }
 
     @Override
@@ -65,14 +62,44 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         User fateme = createUserIfNotFound("fateme", "fateme", roleTeacher);
         User ashkan = createUserIfNotFound("ashkan", "ashkan", roleTeacher);
 
-//        createEmployeeIfNotFound(fateme, "fateme", "sohrabi");
-//        createEmployeeIfNotFound(ashkan, "ashkan", "zarifian");
+        School school = createSchoolIfNotFound("امام جعفر صادق");
+
+        JobTitle title = createTitleIfNotFound("معلم");
+
+        createEmployeeIfNotFound(fateme, "fateme", "sohrabi", school, title);
+        createEmployeeIfNotFound(ashkan, "ashkan", "zarifian", school, title);
 
         alreadySetup = true;
     }
 
     @Transactional
-    Employee createEmployeeIfNotFound(User user, String firstName, String lastName) {
+    JobTitle createTitleIfNotFound(String name) {
+        JobTitle title = jobTitleDao.findByTitle(name);
+
+        if (title == null) {
+            title = new JobTitle();
+            title.setTitle(name);
+            jobTitleDao.save(title);
+        }
+
+        return title;
+    }
+
+    @Transactional
+    School createSchoolIfNotFound(String name) {
+        School school = schoolDao.findByName(name);
+
+        if (school == null) {
+            school = new School();
+            school.setName(name);
+            schoolDao.save(school);
+        }
+
+        return school;
+    }
+
+    @Transactional
+    Employee createEmployeeIfNotFound(User user, String firstName, String lastName, School school, JobTitle title) {
         Employee employee = employeeDao.findByUser(user);
 
         if (employee == null) {
@@ -80,11 +107,14 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
             employee.setUser(user);
             employee.setFirstName(firstName);
             employee.setLastName(lastName);
+            employee.setSchool(school);
+            employee.setTitle(title);
             employeeDao.save(employee);
         }
 
         return employee;
     }
+
     @Transactional
     User createUserIfNotFound(String username, String password, Role role) {
         User user = userDao.findByUsername(username);

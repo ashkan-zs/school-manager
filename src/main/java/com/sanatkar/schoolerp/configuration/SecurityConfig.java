@@ -84,7 +84,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        //TODO: add privileges programmatically problem with orders
         List<Privilege> privilegeList = privilegeDao.findAll();
         for (Privilege privilege : privilegeList) {
             if (!privilege.getName().isEmpty() && !privilege.getUrl().isEmpty()) {

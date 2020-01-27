@@ -18,7 +18,7 @@
                         <select class="form-control" th:field="*{privileges}" id="privilegesInRole" multiple>
                             <option th:each="privilege : ${privileges}"
                                     th:value="${privilege.id}"
-                                    th:text="#{${#strings.arraySplit(privilege.name, ',')[0]}}"></option>
+                                    th:text="#{${privilege.name}}"></option>
                         </select>
                     </div>
                     <input class="btn btn-success" type="Submit" th:value="#{submit}" value="submit">

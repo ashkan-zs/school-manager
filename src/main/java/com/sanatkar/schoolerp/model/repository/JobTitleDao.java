@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface JobTitleDao extends JpaRepository<JobTitle, Long> {
+
+    JobTitle findByTitle(String title);
 }
